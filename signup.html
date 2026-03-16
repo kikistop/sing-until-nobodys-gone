@@ -331,6 +331,14 @@
   const params = new URLSearchParams(location.search);
   const SUNLOG_API = params.get('api') || 'https://sunlog.onrender.com';
 
+  // ── UTM / deep-link pre-fill ────────────────────────────────────────────────
+  // Pre-check Night Owl time block if ?block=nightowl or ?block=night_owl in URL
+  const blockParam = params.get('block');
+  if (blockParam === 'nightowl' || blockParam === 'night_owl') {
+    const nightOwlCheckbox = document.querySelector('input[name="timeBlocks"][value="nightowl"]');
+    if (nightOwlCheckbox) nightOwlCheckbox.checked = true;
+  }
+
   document.getElementById('signupForm').addEventListener('submit', async function(e) {
     e.preventDefault();
 
@@ -380,6 +388,11 @@
     // Collect arrays manually for checkboxes
     data.weeks      = weeksChecked.map(i => i.value);
     data.timeBlocks = blocksChecked.map(i => i.value);
+
+    // Attach UTM parameters for conversion tracking
+    if (params.get('utm_source'))   data.utmSource   = params.get('utm_source');
+    if (params.get('utm_medium'))   data.utmMedium   = params.get('utm_medium');
+    if (params.get('utm_campaign')) data.utmCampaign = params.get('utm_campaign');
 
     btn.disabled = true;
     btn.textContent = 'Submitting…';
