@@ -55,16 +55,9 @@
     </div>
 
     <!-- FORM -->
-    <form
-      class="form-card"
-      method="POST"
-      action="https://formsubmit.co/volunteers@sungclub.com"
-      id="signupForm"
-    >
-      <input type="hidden" name="_subject" value="New Singer Application — Sing Until Nobody's Gone">
-      <input type="hidden" name="_next" value="thank-you.html">
-      <input type="hidden" name="_captcha" value="false">
-      <input type="text" name="_honey" style="display:none;">
+    <form class="form-card" id="signupForm" novalidate>
+      <!-- honeypot — bots fill this, humans don't -->
+      <input type="text" name="_honey" style="display:none;" tabindex="-1" autocomplete="off">
 
       <!-- SECTION A: About You -->
       <div class="form-section">
@@ -289,12 +282,13 @@
 
       <!-- SUBMIT -->
       <div class="form-submit">
-        <button type="submit" class="btn btn-primary">
+        <div id="formError" style="display:none; background:rgba(255,80,80,0.12); border:1px solid rgba(255,80,80,0.35); border-radius:10px; padding:14px 18px; margin-bottom:16px; color:#ff6b6b; font-size:0.9rem;"></div>
+        <button type="submit" class="btn btn-primary" id="submitBtn">
           🎤 Submit My Application
         </button>
         <p class="form-note">
-          You'll receive a confirmation email within 48 hours with your assigned shift time,
-          venue address, and a calendar invite. Questions? Email
+          You'll receive a confirmation email with your assigned shift time,
+          venue address, and your personal QR code for check-in. Questions? Email
           <a href="mailto:volunteers@sungclub.com">volunteers@sungclub.com</a>
         </p>
       </div>
@@ -330,6 +324,90 @@
       document.getElementById('groupFields').style.display =
         this.value === 'yes' ? 'grid' : 'none';
     });
+  });
+
+  // ── SunLog registration submission ─────────────────────────────────────────
+  // SunLog API URL — override via ?api= query param for local dev
+  const params = new URLSearchParams(location.search);
+  const SUNLOG_API = params.get('api') || 'https://sunlog.onrender.com';
+
+  document.getElementById('signupForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    // Honeypot check
+    if (this._honey && this._honey.value) return;
+
+    const btn   = document.getElementById('submitBtn');
+    const errEl = document.getElementById('formError');
+    errEl.style.display = 'none';
+
+    // Client-side required-field check (mirrors server validation)
+    const required = ['firstName','lastName','email','phone'];
+    for (const field of required) {
+      const el = this.elements[field];
+      if (!el || !el.value.trim()) {
+        errEl.textContent = 'Please fill in all required fields (marked with *).';
+        errEl.style.display = 'block';
+        el && el.focus();
+        return;
+      }
+    }
+    // At least one week and one time block
+    const weeksChecked = [...this.querySelectorAll('input[name="weeks"]:checked')];
+    const blocksChecked = [...this.querySelectorAll('input[name="timeBlocks"]:checked')];
+    if (!weeksChecked.length) {
+      errEl.textContent = 'Please select at least one availability week.';
+      errEl.style.display = 'block';
+      return;
+    }
+    if (!blocksChecked.length) {
+      errEl.textContent = 'Please select at least one preferred time block.';
+      errEl.style.display = 'block';
+      return;
+    }
+
+    // Build payload
+    const fd = new FormData(this);
+    const data = {};
+    fd.forEach((val, key) => {
+      if (key === '_honey') return;
+      if (data[key]) {
+        data[key] = Array.isArray(data[key]) ? [...data[key], val] : [data[key], val];
+      } else {
+        data[key] = val;
+      }
+    });
+    // Collect arrays manually for checkboxes
+    data.weeks      = weeksChecked.map(i => i.value);
+    data.timeBlocks = blocksChecked.map(i => i.value);
+
+    btn.disabled = true;
+    btn.textContent = 'Submitting…';
+
+    try {
+      const resp = await fetch(`${SUNLOG_API}/api/register`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      const result = await resp.json();
+      if (!resp.ok) throw new Error(result.error || 'Server error');
+
+      // Redirect to thank-you page with registration info in query params
+      const qs = new URLSearchParams({
+        name: result.name,
+        id:   result.identifier,
+        qr:   result.qrDataUrl,
+        block: result.preferredBlock || '',
+      });
+      window.location.href = `thank-you.html?${qs.toString()}`;
+    } catch (err) {
+      console.error(err);
+      errEl.textContent = err.message || 'Something went wrong. Please try again or email volunteers@sungclub.com.';
+      errEl.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = '🎤 Submit My Application';
+    }
   });
 </script>
 </body>

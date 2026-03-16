@@ -22,34 +22,56 @@
 </nav>
 
 <div style="min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 80px 24px 40px;">
-  <div style="text-align: center; max-width: 560px;">
+  <div style="text-align: center; max-width: 600px;">
     <div style="font-size: 5rem; margin-bottom: 24px;">🎤</div>
-    <div class="label" style="margin-bottom: 16px;">Application Received</div>
+    <div class="label" style="margin-bottom: 16px;" id="pageLabel">Registration Received</div>
     <h1 style="margin-bottom: 20px;">You're in the <span class="gradient-text">lineup!</span></h1>
-    <p style="font-size: 1.1rem; margin-bottom: 32px; color: var(--gray-light);">
-      Thank you for signing up! We'll review your application and send a confirmation
-      email within 48 hours with your confirmed shift time, venue details, and a calendar invite.
+    <p id="introText" style="font-size: 1.1rem; margin-bottom: 32px; color: var(--gray-light);">
+      Thank you for signing up! You'll receive a confirmation email with your
+      shift details and a calendar invite.
     </p>
+
+    <!-- Participant ID + QR code (populated by JS) -->
+    <div id="qrSection" style="display:none; background: var(--bg2); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 32px; margin-bottom: 32px;">
+      <p id="participantGreeting" style="font-size: 1rem; color: var(--gray-light); margin-bottom: 20px;"></p>
+      <div style="background: white; border-radius: 12px; display: inline-flex; padding: 16px; margin-bottom: 16px;">
+        <img id="qrImg" src="" alt="Your check-in QR code" width="200" height="200">
+      </div>
+      <p style="font-size: 0.85rem; color: var(--gray); margin-bottom: 4px;">Save this QR code — you'll need it to check in on event day.</p>
+      <p id="participantId" style="font-size: 0.8rem; color: var(--gray); letter-spacing: 0.05em;"></p>
+    </div>
+
+    <!-- Waiver next step -->
+    <div style="background: linear-gradient(135deg, rgba(255,90,140,0.12), rgba(90,120,255,0.12)); border: 1px solid rgba(255,90,140,0.25); border-radius: 16px; padding: 24px; margin-bottom: 32px;">
+      <h4 style="color: white; margin-bottom: 10px;">Next Step: Sign Your Waiver</h4>
+      <p style="font-size: 0.9rem; color: var(--gray-light); margin-bottom: 16px;">
+        Your spot is not fully confirmed until you complete the participant waiver. It takes about 2 minutes.
+      </p>
+      <a href="waiver.html" class="btn btn-primary" style="display:inline-block;">Sign the Waiver →</a>
+    </div>
+
+    <!-- What happens next -->
     <div style="background: var(--bg2); border: 1px solid rgba(255,255,255,0.07); border-radius: 16px; padding: 28px; margin-bottom: 32px; text-align: left;">
       <h4 style="color: white; margin-bottom: 16px;">What happens next:</h4>
       <div style="display: flex; flex-direction: column; gap: 12px;">
         <div style="display: flex; gap: 12px; align-items: flex-start;">
           <span style="color: var(--pink); font-weight: 700; flex-shrink: 0;">1.</span>
-          <p style="font-size: 0.9rem; margin: 0;">We'll review your application and match you to a shift that fits your availability.</p>
+          <p style="font-size: 0.9rem; margin: 0;">Sign your waiver (link above) to confirm your spot.</p>
         </div>
         <div style="display: flex; gap: 12px; align-items: flex-start;">
           <span style="color: var(--pink); font-weight: 700; flex-shrink: 0;">2.</span>
-          <p style="font-size: 0.9rem; margin: 0;">You'll receive a confirmation email within 48 hours with your confirmed shift details.</p>
+          <p style="font-size: 0.9rem; margin: 0;">We'll assign you a 2-hour slot that matches your availability and send a confirmation email with your shift details.</p>
         </div>
         <div style="display: flex; gap: 12px; align-items: flex-start;">
           <span style="color: var(--pink); font-weight: 700; flex-shrink: 0;">3.</span>
-          <p style="font-size: 0.9rem; margin: 0;">On event day, arrive 15 minutes early, check in via QR code, and get ready to make history.</p>
+          <p style="font-size: 0.9rem; margin: 0;">On event day, arrive 15 minutes early. Scan your QR code to check in with the shift coordinator.</p>
         </div>
       </div>
     </div>
+
     <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
       <a href="index.html" class="btn btn-outline">← Back to Home</a>
-      <a href="faq.html" class="btn btn-primary">Read the FAQ</a>
+      <a href="signup.html" class="btn btn-outline">Register Another Person</a>
     </div>
     <p style="margin-top: 24px; font-size: 0.875rem; color: var(--gray);">
       Questions? <a href="mailto:volunteers@sungclub.com">volunteers@sungclub.com</a>
@@ -61,6 +83,25 @@
   document.getElementById('hamburger').addEventListener('click', function() {
     document.getElementById('navLinks').classList.toggle('open');
   });
+
+  // Read registration data from query params
+  const p = new URLSearchParams(location.search);
+  const name  = p.get('name');
+  const id    = p.get('id');
+  const qr    = p.get('qr');
+  const block = p.get('block');
+
+  const blockLabels = { morning: 'Morning (6am–2pm)', prime: 'Prime Time (2pm–10pm)', night_owl: 'Night Owl (10pm–6am)', any: 'Any block' };
+
+  if (name && id && qr) {
+    document.getElementById('qrSection').style.display = 'block';
+    document.getElementById('qrImg').src = qr;
+    document.getElementById('participantGreeting').textContent =
+      `Hi ${name}! You're registered as participant ${id}${block ? ' — preferred block: ' + (blockLabels[block] || block) : ''}.`;
+    document.getElementById('participantId').textContent = `Participant ID: ${id}`;
+    document.getElementById('introText').textContent =
+      'You\'re officially in the roster! Your QR code is below — save it for event day check-in. We\'ll email you your confirmed shift time.';
+  }
 </script>
 </body>
 </html>
