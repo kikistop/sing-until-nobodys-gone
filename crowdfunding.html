@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crowdfunding Campaign — Sing Until Nobody's Gone</title>
+  <meta name="description" content="Be a Founding Backer of the world's longest karaoke marathon. Our crowdfunding campaign launches April 17, 2026. Get notified at launch.">
+  <meta property="og:title" content="Back the World's Longest Karaoke Session — Campaign Launches April 17">
+  <meta property="og:description" content="Help fund 38 days of non-stop karaoke in Times Square. Founding Backer perks available. Sign up to be notified at launch.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://kikistop.github.io/sing-until-nobodys-gone/og-crowdfunding.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Back the World's Longest Karaoke Session">
+  <meta name="twitter:description" content="38 days. Times Square. World Record. Campaign launches April 17.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    .crowd-hero {
+      background: linear-gradient(160deg, rgba(0,212,255,0.08) 0%, rgba(155,89,182,0.06) 100%);
+      border-bottom: 1px solid rgba(0,212,255,0.12);
+    }
+    .countdown-card {
+      background: linear-gradient(135deg, rgba(0,212,255,0.07), rgba(155,89,182,0.05));
+      border: 1px solid rgba(0,212,255,0.2);
+      border-radius: 20px;
+      padding: 48px 40px;
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .countdown-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 4px;
+      margin: 24px 0;
+    }
+    .countdown-unit { text-align: center; min-width: 72px; }
+    .countdown-num {
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 900;
+      color: var(--blue);
+      line-height: 1;
+    }
+    .countdown-label { font-size: 0.7rem; color: var(--gray); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 6px; }
+    .countdown-sep { font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 900; color: var(--blue); opacity: 0.5; line-height: 1.1; padding-top: 4px; }
+    .progress-bar-wrap { margin: 24px 0; }
+    .progress-track {
+      background: rgba(255,255,255,0.08);
+      border-radius: 100px;
+      height: 16px;
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+    .progress-fill {
+      height: 100%;
+      border-radius: 100px;
+      background: linear-gradient(90deg, var(--blue), var(--purple));
+      transition: width 1s ease;
+    }
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      color: var(--gray);
+    }
+    .progress-meta strong { color: var(--white); }
+    .tier-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 48px; }
+    .tier-card {
+      background: var(--bg2);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 16px;
+      padding: 28px 24px;
+      transition: border-color 0.2s, transform 0.2s;
+      position: relative;
+    }
+    .tier-card:hover { border-color: rgba(255,45,120,0.3); transform: translateY(-2px); }
+    .tier-card.featured { border-color: rgba(0,212,255,0.35); box-shadow: 0 0 30px rgba(0,212,255,0.08); }
+    .tier-badge {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 100px;
+      margin-bottom: 14px;
+    }
+    .tier-badge.founding { background: rgba(255,215,0,0.15); color: var(--gold); border: 1px solid rgba(255,215,0,0.25); }
+    .tier-badge.backer { background: rgba(0,212,255,0.12); color: var(--blue); border: 1px solid rgba(0,212,255,0.2); }
+    .tier-badge.supporter { background: rgba(155,89,182,0.15); color: var(--purple-light); border: 1px solid rgba(155,89,182,0.25); }
+    .tier-badge.fan { background: rgba(255,255,255,0.06); color: var(--gray-light); border: 1px solid rgba(255,255,255,0.1); }
+    .tier-price { font-size: 2rem; font-weight: 900; color: var(--white); margin-bottom: 4px; }
+    .tier-name { font-weight: 700; font-size: 1.1rem; color: var(--white); margin-bottom: 12px; }
+    .tier-perks { list-style: none; padding: 0; }
+    .tier-perks li { font-size: 0.85rem; color: var(--gray-light); padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; gap: 8px; align-items: flex-start; }
+    .tier-perks li:last-child { border-bottom: none; }
+    .tier-perks li::before { content: "✓"; color: var(--blue); font-weight: 700; flex-shrink: 0; }
+    .tier-limit { font-size: 0.75rem; color: var(--gray); margin-top: 14px; }
+    .share-row { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+    .share-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 100px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid;
+      transition: opacity 0.2s, transform 0.15s;
+      text-decoration: none;
+    }
+    .share-btn:hover { opacity: 0.85; transform: translateY(-1px); text-decoration: none; }
+    .share-twitter { background: rgba(29,161,242,0.1); border-color: rgba(29,161,242,0.3); color: #1da1f2; }
+    .share-instagram { background: rgba(225,48,108,0.1); border-color: rgba(225,48,108,0.3); color: #e1306c; }
+    .share-copy { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.15); color: var(--gray-light); }
+    .email-form-inline { display: flex; gap: 10px; max-width: 440px; margin: 20px auto 0; }
+    .email-form-inline input {
+      flex: 1;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px;
+      color: var(--white);
+      font-size: 0.9rem;
+      padding: 10px 16px;
+      outline: none;
+    }
+    .email-form-inline input::placeholder { color: var(--gray); }
+    .email-form-inline input:focus { border-color: rgba(0,212,255,0.4); }
+    .inline-success { font-size: 0.85rem; color: #4ade80; margin-top: 10px; display: none; }
+    @media (max-width: 640px) {
+      .countdown-card { padding: 32px 20px; }
+      .email-form-inline { flex-direction: column; }
+      .tier-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">
+      <span class="mic">🎤</span> SUN
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="participate.html">Participate</a></li>
+      <li><a href="volunteer.html">Volunteer</a></li>
+      <li><a href="crowdfunding.html" style="color: var(--blue);">Crowdfunding</a></li>
+      <li><a href="sponsors.html">Sponsors</a></li>
+      <li><a href="night-owl.html">Night Owl</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="signup.html" class="nav-cta">Sign Up to Sing</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">☰</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="crowd-hero" style="padding-top: 120px;">
+  <div class="container">
+    <div class="section-header" style="margin-bottom: 48px;">
+      <div class="label" style="color: var(--blue);">Crowdfunding Campaign</div>
+      <h1>Help Us Make<br><span class="gradient-text">History</span></h1>
+      <p style="max-width: 580px; margin: 16px auto 0; font-size: 1.05rem;">
+        38 days. Times Square. A Guinness World Record. We're funding this through people — not corporations.
+        Campaign launches <strong style="color: var(--white);">April 17, 2026 at 12:00 PM EDT.</strong>
+      </p>
+    </div>
+
+    <!-- Countdown -->
+    <div class="countdown-card">
+      <div class="label" style="color: var(--blue); margin-bottom: 4px;">Campaign Launches In</div>
+      <div class="countdown-wrap" id="countdown">
+        <div class="countdown-unit">
+          <div class="countdown-num" id="cd-days">--</div>
+          <div class="countdown-label">Days</div>
+        </div>
+        <div class="countdown-sep">:</div>
+        <div class="countdown-unit">
+          <div class="countdown-num" id="cd-hours">--</div>
+          <div class="countdown-label">Hours</div>
+        </div>
+        <div class="countdown-sep">:</div>
+        <div class="countdown-unit">
+          <div class="countdown-num" id="cd-mins">--</div>
+          <div class="countdown-label">Minutes</div>
+        </div>
+        <div class="countdown-sep">:</div>
+        <div class="countdown-unit">
+          <div class="countdown-num" id="cd-secs">--</div>
+          <div class="countdown-label">Seconds</div>
+        </div>
+      </div>
+      <p style="font-size: 0.85rem; color: var(--gray);">April 17, 2026 · 12:00 PM EDT</p>
+
+      <!-- Email signup inline -->
+      <div style="margin-top: 28px;">
+        <p style="font-size: 0.9rem; color: var(--gray-light); margin-bottom: 0;">Get notified the moment the campaign goes live:</p>
+        <form id="notifyForm" class="email-form-inline" novalidate>
+          <input type="email" id="notifyEmail" placeholder="your@email.com" required>
+          <button type="submit" class="btn btn-primary" style="white-space: nowrap; padding: 10px 20px; font-size: 0.9rem;">Notify Me</button>
+        </form>
+        <div class="inline-success" id="notifySuccess">You're in! We'll email you when the campaign goes live. 🎉</div>
+      </div>
+    </div>
+
+    <!-- Progress Bar (live data placeholder) -->
+    <div style="max-width: 640px; margin: 0 auto 64px;">
+      <div class="label" style="color: var(--gray); margin-bottom: 10px;">Campaign Goal — Live at Launch</div>
+      <div class="progress-bar-wrap">
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+        </div>
+        <div class="progress-meta">
+          <span><strong id="pledgedAmount">$0</strong> pledged</span>
+          <span id="pledgedPct">0%</span>
+          <span>Goal: <strong>$150,000</strong></span>
+        </div>
+      </div>
+      <p style="font-size: 0.8rem; color: var(--gray); margin-top: 8px; text-align: center;">Progress bar updates live when campaign launches. <a href="early-access.html" style="color: var(--blue);">Get early access</a></p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- WHAT FUNDS SUPPORT -->
+<section style="background: var(--bg);">
+  <div class="container">
+    <div class="section-header">
+      <div class="label">Where the Money Goes</div>
+      <h2>Every Dollar Has a <span class="glow-pink">Purpose</span></h2>
+      <p>A Times Square world record attempt requires real infrastructure. Here's exactly what we're funding.</p>
+    </div>
+
+    <div class="grid-3" style="margin-bottom: 48px;">
+      <div class="card" style="text-align: center;">
+        <div style="font-size: 2.5rem; margin-bottom: 14px;">🎤</div>
+        <h4 style="color: var(--white); margin-bottom: 8px;">Sound & Stage</h4>
+        <div style="font-size: 1.5rem; font-weight: 900; color: var(--blue); margin-bottom: 8px;">$45K</div>
+        <p style="font-size: 0.875rem;">Professional PA system, microphones, weather-resistant outdoor stage, and backup equipment for 38 days of continuous performance.</p>
+      </div>
+      <div class="card" style="text-align: center;">
+        <div style="font-size: 2.5rem; margin-bottom: 14px;">📋</div>
+        <h4 style="color: var(--white); margin-bottom: 8px;">Permits & Compliance</h4>
+        <div style="font-size: 1.5rem; font-weight: 900; color: var(--pink); margin-bottom: 8px;">$55K</div>
+        <p style="font-size: 0.875rem;">NYC event permits, Guinness World Records adjudication, liability insurance, and legal compliance for a 38-day public activation.</p>
+      </div>
+      <div class="card" style="text-align: center;">
+        <div style="font-size: 2.5rem; margin-bottom: 14px;">🧠</div>
+        <h4 style="color: var(--white); margin-bottom: 8px;">Mental Health Impact</h4>
+        <div style="font-size: 1.5rem; font-weight: 900; color: var(--gold); margin-bottom: 8px;">All Proceeds</div>
+        <p style="font-size: 0.875rem;">Every dollar beyond production costs goes directly to Gen-Z mental health organizations. We're measuring impact from day one.</p>
+      </div>
+    </div>
+
+    <div class="grid-3">
+      <div class="card" style="text-align: center;">
+        <div style="font-size: 2.5rem; margin-bottom: 14px;">🎥</div>
+        <h4 style="color: var(--white); margin-bottom: 8px;">Live Streaming</h4>
+        <div style="font-size: 1.5rem; font-weight: 900; color: var(--purple-light); margin-bottom: 8px;">$20K</div>
+        <p style="font-size: 0.875rem;">Multi-camera 24/7 livestream setup, cloud hosting, and technical crew to broadcast every moment of the 912-hour attempt.</p>
+      </div>
+      <div class="card" style="text-align: center;">
+        <div style="font-size: 2.5rem; margin-bottom: 14px;">🏕️</div>
+        <h4 style="color: var(--white); margin-bottom: 8px;">Volunteer Support</h4>
+        <div style="font-size: 1.5rem; font-weight: 900; color: var(--blue); margin-bottom: 8px;">$15K</div>
+        <p style="font-size: 0.875rem;">Meals, transportation, and support for the 100+ volunteers and official witnesses required for GWR compliance across 228 shifts.</p>
+      </div>
+      <div class="card" style="text-align: center;">
+        <div style="font-size: 2.5rem; margin-bottom: 14px;">🌐</div>
+        <h4 style="color: var(--white); margin-bottom: 8px;">Operations</h4>
+        <div style="font-size: 1.5rem; font-weight: 900; color: var(--pink); margin-bottom: 8px;">$15K</div>
+        <p style="font-size: 0.875rem;">Coordination, logistics, security, weather contingencies, and the team keeping 38 days of non-stop singing running without a hitch.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- REWARD TIERS -->
+<section style="background: var(--bg2);">
+  <div class="container">
+    <div class="section-header">
+      <div class="label" style="color: var(--gold);">Reward Tiers</div>
+      <h2>Choose Your <span class="glow-blue">Backing Level</span></h2>
+      <p>Every backer gets exclusive perks. These tiers are previewed now and will be live on April 17.</p>
+    </div>
+
+    <div class="tier-grid">
+      <!-- Founding Backer -->
+      <div class="tier-card featured">
+        <div class="tier-badge founding">⭐ Founding Backer</div>
+        <div class="tier-price">$250</div>
+        <div class="tier-name">Be There From Day One</div>
+        <ul class="tier-perks">
+          <li>Name in Guinness World Record documentation</li>
+          <li>Exclusive Founding Backer enamel pin</li>
+          <li>Priority acknowledgment in all campaign materials</li>
+          <li>Signed certificate of participation</li>
+          <li>Early access to merch pre-orders</li>
+          <li>Backstage livestream access link</li>
+        </ul>
+        <div class="tier-limit">⚡ Only 100 spots · Limited availability</div>
+      </div>
+
+      <!-- Headliner -->
+      <div class="tier-card">
+        <div class="tier-badge backer">🎤 Headliner</div>
+        <div class="tier-price">$100</div>
+        <div class="tier-name">Front Row Support</div>
+        <ul class="tier-perks">
+          <li>Name listed in digital program</li>
+          <li>Exclusive backer update newsletter</li>
+          <li>Sticker pack + thank-you postcard</li>
+          <li>Early merch access</li>
+          <li>Shoutout on our social media</li>
+        </ul>
+        <div class="tier-limit">250 spots available</div>
+      </div>
+
+      <!-- Chorus Member -->
+      <div class="tier-card">
+        <div class="tier-badge supporter">🎵 Chorus Member</div>
+        <div class="tier-price">$50</div>
+        <div class="tier-name">Part of the Harmony</div>
+        <ul class="tier-perks">
+          <li>Name listed in digital credits</li>
+          <li>Backer-only project updates</li>
+          <li>Sticker pack</li>
+          <li>Warm fuzzy feelings</li>
+        </ul>
+        <div class="tier-limit">Unlimited</div>
+      </div>
+
+      <!-- Fan -->
+      <div class="tier-card">
+        <div class="tier-badge fan">🎶 Fan</div>
+        <div class="tier-price">$15</div>
+        <div class="tier-name">Show Your Support</div>
+        <ul class="tier-perks">
+          <li>Name in digital thank-you list</li>
+          <li>Project updates by email</li>
+          <li>Good vibes from 400 singers</li>
+        </ul>
+        <div class="tier-limit">Unlimited</div>
+      </div>
+    </div>
+
+    <div style="text-align: center; padding: 32px 0 16px;">
+      <p style="color: var(--gray); margin-bottom: 20px;">Tiers go live April 17. Sign up now so you're ready to back at launch:</p>
+      <a href="early-access.html?utm_source=crowdfunding&utm_medium=tiers" class="btn btn-primary">🔔 Notify Me at Launch</a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CAMPAIGN DETAILS -->
+<section style="background: var(--bg);">
+  <div class="container">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start;">
+      <div>
+        <div class="label" style="color: var(--pink); margin-bottom: 12px;">About the Campaign</div>
+        <h2 style="margin-bottom: 20px;">Why <span class="glow-pink">Crowdfunding?</span></h2>
+        <p style="margin-bottom: 16px;">A 38-day world record attempt in Times Square costs serious money — sound equipment, permits, livestreaming, volunteer support, and legal compliance add up fast. Sponsors help, but we're building this with people, not just corporations.</p>
+        <p style="margin-bottom: 16px;">Crowdfunding means backers like you are co-owners of this moment. Your name goes in the record. Your contribution is what makes it happen. Every dollar beyond production costs goes to Gen-Z mental health organizations.</p>
+        <p>We chose this path because if anyone should fund a world record about singing together, it should be the people who sing together.</p>
+      </div>
+      <div>
+        <div class="label" style="color: var(--blue); margin-bottom: 12px;">Timeline</div>
+        <h2 style="margin-bottom: 20px;">What <span class="glow-blue">Happens When</span></h2>
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <div style="display: flex; gap: 16px; align-items: flex-start;">
+            <div style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.2); border-radius: 8px; padding: 8px 14px; font-size: 0.8rem; font-weight: 700; color: var(--blue); white-space: nowrap; flex-shrink: 0;">Apr 1</div>
+            <div><strong style="color: var(--white);">Merch Pre-Orders Open</strong><p style="font-size: 0.875rem; margin-top: 4px;">Classic Tee, Night Owl Hoodie, Enamel Pin, and more available to pre-order.</p></div>
+          </div>
+          <div style="display: flex; gap: 16px; align-items: flex-start;">
+            <div style="background: rgba(255,215,0,0.1); border: 1px solid rgba(255,215,0,0.2); border-radius: 8px; padding: 8px 14px; font-size: 0.8rem; font-weight: 700; color: var(--gold); white-space: nowrap; flex-shrink: 0;">Apr 17</div>
+            <div><strong style="color: var(--white);">Campaign Launches at Noon EDT</strong><p style="font-size: 0.875rem; margin-top: 4px;">Founding Backer tier goes live. Only 100 spots — first come, first served.</p></div>
+          </div>
+          <div style="display: flex; gap: 16px; align-items: flex-start;">
+            <div style="background: rgba(255,45,120,0.1); border: 1px solid rgba(255,45,120,0.2); border-radius: 8px; padding: 8px 14px; font-size: 0.8rem; font-weight: 700; color: var(--pink); white-space: nowrap; flex-shrink: 0;">Jun 12</div>
+            <div><strong style="color: var(--white);">Event Begins</strong><p style="font-size: 0.875rem; margin-top: 4px;">38 days of non-stop karaoke begins in Times Square. Your world record starts here.</p></div>
+          </div>
+          <div style="display: flex; gap: 16px; align-items: flex-start;">
+            <div style="background: rgba(155,89,182,0.1); border: 1px solid rgba(155,89,182,0.2); border-radius: 8px; padding: 8px 14px; font-size: 0.8rem; font-weight: 700; color: var(--purple-light); white-space: nowrap; flex-shrink: 0;">Jul 19</div>
+            <div><strong style="color: var(--white);">World Record Claimed</strong><p style="font-size: 0.875rem; margin-top: 4px;">912 hours complete. Your name is in the Guinness records. History made.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SOCIAL SHARING -->
+<section style="background: var(--bg2);">
+  <div class="container">
+    <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+      <div class="label" style="color: var(--pink); margin-bottom: 12px;">Spread the Word</div>
+      <h2 style="margin-bottom: 16px;">Tell Your Friends<br>About <span class="glow-pink">the Campaign</span></h2>
+      <p style="margin-bottom: 32px;">Every share helps us reach more backers. The bigger our backer community, the more we raise for mental health.</p>
+
+      <div class="share-row">
+        <a href="https://twitter.com/intent/tweet?text=Help+fund+the+world%27s+longest+karaoke+session+%E2%80%94+38+days+in+Times+Square.+Campaign+launches+April+17%21+%23SingUntilNobodysGone&url=https%3A%2F%2Fkikistop.github.io%2Fsing-until-nobodys-gone%2Fcrowdfunding.html"
+           target="_blank" rel="noopener" class="share-btn share-twitter">
+          𝕏 Share on X / Twitter
+        </a>
+        <button class="share-btn share-copy" id="copyLinkBtn" onclick="copyLink()">
+          📋 Copy Link
+        </button>
+      </div>
+
+      <div style="margin-top: 40px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.07);">
+        <p style="color: var(--gray); margin-bottom: 16px;">Not on social? Forward this page to someone who should be part of history:</p>
+        <a href="mailto:?subject=You%20should%20back%20this%20world%20record%20attempt&body=38%20days%20of%20karaoke%20in%20Times%20Square.%20Crowdfunding%20launches%20April%2017%3A%20https%3A%2F%2Fkikistop.github.io%2Fsing-until-nobodys-gone%2Fcrowdfunding.html"
+           class="btn btn-outline">✉️ Email a Friend</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background: var(--bg); border-top: 1px solid rgba(255,255,255,0.06); padding: 40px 0; text-align: center;">
+  <div class="container">
+    <div class="nav-logo" style="justify-content: center; margin-bottom: 16px; display: flex; gap: 8px; align-items: center;">
+      <span class="mic">🎤</span> <strong>Sing Until Nobody's Gone</strong>
+    </div>
+    <p style="font-size: 0.85rem; margin-bottom: 8px;">June 12 – July 19, 2026 · Times Square, New York City</p>
+    <p style="font-size: 0.8rem; color: var(--gray);">
+      <a href="index.html">Home</a> · <a href="participate.html">Participate</a> · <a href="volunteer.html">Volunteer</a> · <a href="sponsors.html">Sponsors</a> · <a href="press.html">Press</a> · <a href="faq.html">FAQ</a>
+    </p>
+  </div>
+</footer>
+
+<script>
+  // Hamburger
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+
+  // Countdown to April 17, 2026 12:00 PM EDT (UTC-4)
+  const LAUNCH = new Date('2026-04-17T16:00:00Z').getTime();
+  function updateCountdown() {
+    const now = Date.now();
+    const diff = LAUNCH - now;
+    if (diff <= 0) {
+      document.getElementById('countdown').innerHTML = '<div style="font-size:1.5rem;color:var(--blue);font-weight:900;">🚀 Campaign is LIVE!</div>';
+      return;
+    }
+    const days  = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const mins  = Math.floor((diff % 3600000) / 60000);
+    const secs  = Math.floor((diff % 60000) / 1000);
+    document.getElementById('cd-days').textContent  = String(days).padStart(2, '0');
+    document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
+    document.getElementById('cd-mins').textContent  = String(mins).padStart(2, '0');
+    document.getElementById('cd-secs').textContent  = String(secs).padStart(2, '0');
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  // UTM capture
+  const params = new URLSearchParams(location.search);
+  const UTM = { source: params.get('utm_source'), medium: params.get('utm_medium'), campaign: params.get('utm_campaign') };
+  const SUNLOG_API = params.get('api') || 'https://sunlog.onrender.com';
+
+  // Email notify form
+  document.getElementById('notifyForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = document.getElementById('notifyEmail').value.trim();
+    if (!email) return;
+    try {
+      await fetch(`${SUNLOG_API}/api/email-list`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, source: UTM.source || 'crowdfunding', utmSource: UTM.source, utmMedium: UTM.medium, utmCampaign: UTM.campaign })
+      });
+    } catch (_) {}
+    document.getElementById('notifyForm').style.display = 'none';
+    document.getElementById('notifySuccess').style.display = 'block';
+  });
+
+  // Live progress bar (placeholder — will fetch from API at launch)
+  async function fetchProgress() {
+    try {
+      const r = await fetch(`${SUNLOG_API}/api/crowdfunding-stats`);
+      if (!r.ok) return;
+      const d = await r.json();
+      const pct = Math.min(100, Math.round((d.pledged / d.goal) * 100));
+      document.getElementById('pledgedAmount').textContent = '$' + d.pledged.toLocaleString();
+      document.getElementById('pledgedPct').textContent = pct + '%';
+      document.getElementById('progressFill').style.width = pct + '%';
+    } catch (_) {}
+  }
+  fetchProgress();
+
+  // Copy link
+  function copyLink() {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      const btn = document.getElementById('copyLinkBtn');
+      btn.textContent = '✅ Copied!';
+      setTimeout(() => { btn.textContent = '📋 Copy Link'; }, 2000);
+    });
+  }
+
+  // Offline-first form queuing (retry on reconnect)
+  window.addEventListener('online', () => {
+    const pending = JSON.parse(localStorage.getItem('sun_pending_forms') || '[]');
+    pending.forEach(async ({ url, body }) => {
+      try {
+        await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+      } catch (_) {}
+    });
+    if (pending.length) localStorage.removeItem('sun_pending_forms');
+  });
+</script>
+</body>
+</html>

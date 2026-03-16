@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sponsorship — Sing Until Nobody's Gone</title>
+  <meta name="description" content="Sponsor the world's longest karaoke marathon in Times Square. 38 days of Gen-Z mental health awareness. Title, presenting, and supporting tier packages available.">
+  <meta property="og:title" content="Sponsor Sing Until Nobody's Gone — Times Square World Record">
+  <meta property="og:description" content="38 days of non-stop karaoke in Times Square. Brand visibility, CSR alignment with mental health, and Guinness World Record association. Inquire about sponsorship tiers.">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    .sponsor-form-wrap { max-width: 700px; margin: 0 auto; }
+    .form-card {
+      background: var(--bg2);
+      border: 1px solid rgba(255,215,0,0.12);
+      border-radius: 20px;
+      padding: 40px 36px;
+    }
+    .form-group { margin-bottom: 20px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    label { display: block; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--gray-light); margin-bottom: 6px; }
+    label span.req { color: var(--pink); }
+    input[type="text"], input[type="email"], input[type="tel"], select, textarea {
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      color: var(--white);
+      font-size: 0.95rem;
+      font-family: inherit;
+      padding: 10px 14px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    input:focus, select:focus, textarea:focus { border-color: rgba(255,215,0,0.4); }
+    input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.3); }
+    select option { background: #1a1a2e; }
+    textarea { resize: vertical; min-height: 100px; }
+    .error-msg { font-size: 0.8rem; color: var(--pink); margin-top: 4px; display: none; }
+    .field-error input, .field-error select, .field-error textarea { border-color: var(--pink); }
+    .field-error .error-msg { display: block; }
+
+    .checkbox-group { display: flex; flex-direction: column; gap: 10px; }
+    .checkbox-label {
+      display: flex; align-items: flex-start; gap: 10px;
+      cursor: pointer; color: var(--gray-light); font-size: 0.9rem; font-weight: 400;
+    }
+    .checkbox-label input[type="checkbox"] { width: 16px; height: 16px; flex-shrink: 0; margin-top: 2px; accent-color: var(--gold); }
+
+    /* Tier cards */
+    .tier-select-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 8px; }
+    .tier-option { position: relative; }
+    .tier-option input[type="radio"] { position: absolute; opacity: 0; width: 0; height: 0; }
+    .tier-option-card {
+      border: 1.5px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 16px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .tier-option:hover .tier-option-card { border-color: rgba(255,215,0,0.3); }
+    .tier-option input:checked + .tier-option-card {
+      border-color: var(--gold);
+      background: rgba(255,215,0,0.06);
+    }
+    .tier-opt-name { font-weight: 700; font-size: 0.9rem; color: var(--white); margin-bottom: 2px; }
+    .tier-opt-price { font-size: 0.8rem; color: var(--gold); }
+    .tier-opt-desc { font-size: 0.75rem; color: var(--gray); margin-top: 4px; }
+
+    .submit-area { margin-top: 28px; }
+    .submit-area .btn { width: 100%; font-size: 1rem; padding: 14px; }
+    .form-note { font-size: 0.8rem; color: var(--gray); margin-top: 10px; text-align: center; }
+
+    #successState { display: none; text-align: center; padding: 48px 0; }
+    #successState .success-icon { font-size: 3rem; margin-bottom: 16px; }
+
+    .value-prop-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 64px; }
+    .value-prop-card { background: var(--bg2); border: 1px solid rgba(255,255,255,0.07); border-radius: 14px; padding: 24px; }
+    .value-prop-stat { font-size: 1.8rem; font-weight: 900; margin-bottom: 6px; }
+
+    @media (max-width: 640px) {
+      .form-card { padding: 24px 16px; }
+      .form-row { grid-template-columns: 1fr; }
+      .tier-select-grid { grid-template-columns: 1fr; }
+      .value-prop-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">
+      <span class="mic">🎤</span> SUN
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="participate.html">Participate</a></li>
+      <li><a href="volunteer.html">Volunteer</a></li>
+      <li><a href="crowdfunding.html">Crowdfunding</a></li>
+      <li><a href="sponsors.html" style="color: var(--gold);">Sponsors</a></li>
+      <li><a href="night-owl.html">Night Owl</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="signup.html" class="nav-cta">Sign Up to Sing</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">☰</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section style="padding-top: 120px; background: linear-gradient(160deg, rgba(255,215,0,0.06) 0%, rgba(255,45,120,0.04) 100%); border-bottom: 1px solid rgba(255,215,0,0.1);">
+  <div class="container">
+    <div class="section-header" style="margin-bottom: 48px;">
+      <div class="label" style="color: var(--gold);">Sponsorship Opportunities</div>
+      <h1>Partner with <span style="color: var(--gold);">History</span></h1>
+      <p style="max-width: 560px; margin: 16px auto 0; font-size: 1.05rem;">
+        38 days. Times Square. A Guinness World Record. Uninterrupted brand visibility during the world's longest karaoke marathon — with direct alignment to Gen-Z mental health advocacy.
+      </p>
+    </div>
+
+    <!-- Value Props -->
+    <div class="value-prop-grid">
+      <div class="value-prop-card">
+        <div class="value-prop-stat" style="color: var(--blue);">38 Days</div>
+        <div style="font-weight: 700; color: var(--white); margin-bottom: 6px;">Times Square Presence</div>
+        <p style="font-size: 0.875rem;">Continuous brand visibility at one of the most-photographed locations in the world. Millions of daily passers-by, tourists, and media eyes.</p>
+      </div>
+      <div class="value-prop-card">
+        <div class="value-prop-stat" style="color: var(--pink);">24/7</div>
+        <div style="font-weight: 700; color: var(--white); margin-bottom: 6px;">Livestream Audience</div>
+        <p style="font-size: 0.875rem;">Non-stop streaming reaches a global audience. Title and Presenting sponsors featured in every stream overlay, every broadcast, every clip.</p>
+      </div>
+      <div class="value-prop-card">
+        <div class="value-prop-stat" style="color: var(--gold);">400+</div>
+        <div style="font-weight: 700; color: var(--white); margin-bottom: 6px;">Engaged Participants</div>
+        <p style="font-size: 0.875rem;">Every singer is an ambassador. Your brand reaches their networks, their social posts, their communities — amplified across the full 912 hours.</p>
+      </div>
+      <div class="value-prop-card">
+        <div class="value-prop-stat" style="color: var(--purple-light);">GWR</div>
+        <div style="font-weight: 700; color: var(--white); margin-bottom: 6px;">World Record Association</div>
+        <p style="font-size: 0.875rem;">Your brand is permanently linked to a Guinness World Record. A story told forever in record documentation, media coverage, and public memory.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SPONSORSHIP TIERS -->
+<section style="background: var(--bg);">
+  <div class="container">
+    <div class="section-header">
+      <div class="label" style="color: var(--gold);">Sponsorship Tiers</div>
+      <h2>Find Your <span style="color: var(--gold);">Partnership Level</span></h2>
+      <p>From naming rights to product placement — we have a tier for every brand and budget.</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; margin-bottom: 48px;">
+
+      <!-- Title Sponsor -->
+      <div class="card" style="border-color: rgba(255,215,0,0.3); background: linear-gradient(135deg, rgba(255,215,0,0.05), rgba(255,215,0,0.02));">
+        <div class="label" style="color: var(--gold); margin-bottom: 10px;">👑 Title Sponsor</div>
+        <div style="font-size: 1.8rem; font-weight: 900; color: var(--white); margin-bottom: 4px;">$100K–$200K</div>
+        <p style="font-size: 0.8rem; color: var(--gray); margin-bottom: 16px;">Exclusive — 1 available</p>
+        <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 8px;">
+          <li style="font-size: 0.875rem; color: var(--gray-light); display: flex; gap: 8px;"><span style="color: var(--gold);">✓</span> Event naming rights ("Sing Until Nobody's Gone, presented by [Brand]")</li>
+          <li style="font-size: 0.875rem; color: var(--gray-light); display: flex; gap: 8px;"><span style="color: var(--gold);">✓</span> Dominant stage and venue branding</li>
+          <li style="font-size: 0.875rem; color: var(--gray-light); display: flex; gap: 8px;"><span style="color: var(--gold);">✓</span> Livestream overlay and intro/outro branding</li>
+          <li style="font-size: 0.875rem; color: var(--gray-light); display: flex; gap: 8px;"><span style="color: var(--gold);">✓</span> All marketing materials, website, and press coverage</li>
+          <li style="font-size: 0.875rem; color: var(--gray-light); display: flex; gap: 8px;"><span style="color: var(--gold);">✓</span> VIP access for 10 team members</li>
+          <li style="font-size: 0.875rem; color: var(--gray-light); display: flex; gap: 8px;"><span style="color: var(--gold);">✓</span> GWR documentation credit</li>
+          <li style="font-size: 0.875rem; color: var(--gray-light); display: flex; gap: 8px;"><span style="color: var(--gold);">✓</span> Dedicated PR and media support</li>
+        </ul>
+      </div>
+
+      <!-- Presenting Sponsor -->
+      <div class="card" style="border-color: rgba(0,212,255,0.2);">
+        <div class="label" style="color: var(--blue); margin-bottom: 10px;">🌟 Presenting Sponsor</div>
+        <div style="font-size: 1.8rem; font-weight: 900; color: var(--white); margin-bottom: 4px;">$50K–$75K</div>
+        <p style="font-size: 0.8rem; color: var(--gray); margin-bottom: 16px;">Up to 2 available</p>
+        <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 8px;">
+          <li style="font-size: 0.875rem; color: var(--gray-light); display: flex; gap: 8px;"><span style="color: var(--blue);">✓</span> Prominent stage and venue signage</li>
+          <li style="font-size: 0.875rem; color: var(--gray-light); display: flex; gap: 8px;"><span style="color: var(--blue);">✓</span> Livestream sponsored segment (1 per week)</li>
+          <li style="font-size: 0.875rem; color: var(--gray-light); display: flex; gap: 8px;"><span style="color: var(--blue);">✓</span> Brand on all event marketing materials</li>
+          <li style="font-size: 0.875rem; color: var(--gray-light); display: flex; gap: 8px;"><span style="color: var(--blue);">✓</span> Merch branding (co-branded items)</li>
+          <li style="font-size: 0.875rem; color: var(--gray-light); display: flex; gap: 8px;"><span style="color: var(--blue);">✓</span> VIP access for 6 team members</li>
+          <li style="font-size: 0.875rem; color: var(--gray-light); display: flex; gap: 8px;"><span style="color: var(--blue);">✓</span> GWR documentation credit</li>
+        </ul>
+      </div>
+
+      <!-- Gold Sponsor -->
+      <div class="card">
+        <div class="label" style="color: #f59e0b; margin-bottom: 10px;">🥇 Gold Sponsor</div>
+        <div style="font-size: 1.8rem; font-weight: 900; color: var(--white); margin-bottom: 4px;">$25K</div>
+        <p style="font-size: 0.8rem; color: var(--gray); margin-bottom: 16px;">Up to 4 available</p>
+        <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 8px;">
+          <li style="font-size: 0.875rem; color: var(--gray-light); display: flex; gap: 8px;"><span style="color: #f59e0b;">✓</span> Event signage and stage presence</li>
+          <li style="font-size: 0.875rem; color: var(--gray-light); display: flex; gap: 8px;"><span style="color: #f59e0b;">✓</span> Brand on event website and program</li>
+          <li style="font-size: 0.875rem; color: var(--gray-light); display: flex; gap: 8px;"><span style="color: #f59e0b;">✓</span> Social media shoutout campaign</li>
+          <li style="font-size: 0.875rem; color: var(--gray-light); display: flex; gap: 8px;"><span style="color: #f59e0b;">✓</span> VIP access for 4 team members</li>
+        </ul>
+      </div>
+
+      <!-- Silver + In-Kind + Media -->
+      <div class="card">
+        <div class="label" style="color: var(--gray-light); margin-bottom: 10px;">🥈 Silver &amp; Below</div>
+        <div style="margin-bottom: 16px;">
+          <div style="font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 2px;">Silver — $10K</div>
+          <p style="font-size: 0.8rem; color: var(--gray); margin-bottom: 12px;">Digital presence, website listing, social features.</p>
+          <div style="font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 2px;">In-Kind Partnership</div>
+          <p style="font-size: 0.8rem; color: var(--gray); margin-bottom: 12px;">Equipment, food/beverage, services in exchange for branding value.</p>
+          <div style="font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 2px;">Media Partner</div>
+          <p style="font-size: 0.8rem; color: var(--gray);">Coverage exchange for event media rights and exclusive content access.</p>
+        </div>
+        <a href="#inquiry-form" class="btn btn-outline" style="font-size: 0.85rem; padding: 8px 16px;">Inquire About Custom Tier</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- INQUIRY FORM -->
+<section id="inquiry-form" style="background: var(--bg2);">
+  <div class="container">
+    <div class="section-header" style="margin-bottom: 40px;">
+      <div class="label" style="color: var(--gold);">Partnership Inquiry</div>
+      <h2>Start the <span style="color: var(--gold);">Conversation</span></h2>
+      <p>Fill out the form below and our partnerships team will respond within 2 business days with a customized proposal.</p>
+    </div>
+
+    <div class="sponsor-form-wrap">
+      <div class="form-card" id="formCard">
+
+        <div id="formState">
+          <form id="sponsorForm" novalidate>
+
+            <!-- Company Info -->
+            <div style="font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); border-bottom: 1px solid rgba(255,215,0,0.15); padding-bottom: 8px; margin-bottom: 20px;">Company Information</div>
+
+            <div class="form-row">
+              <div class="form-group" id="fg-company">
+                <label for="spCompany">Company Name <span class="req">*</span></label>
+                <input type="text" id="spCompany" placeholder="Your company" required>
+                <div class="error-msg">Company name is required.</div>
+              </div>
+              <div class="form-group" id="fg-contact">
+                <label for="spContact">Contact Name <span class="req">*</span></label>
+                <input type="text" id="spContact" placeholder="Your name" autocomplete="name" required>
+                <div class="error-msg">Contact name is required.</div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group" id="fg-email">
+                <label for="spEmail">Email Address <span class="req">*</span></label>
+                <input type="email" id="spEmail" placeholder="you@company.com" autocomplete="email" required>
+                <div class="error-msg">Valid email required.</div>
+              </div>
+              <div class="form-group">
+                <label for="spPhone">Phone Number</label>
+                <input type="tel" id="spPhone" placeholder="+1 (555) 000-0000" autocomplete="tel">
+              </div>
+            </div>
+
+            <!-- Tier Interest -->
+            <div style="font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); border-bottom: 1px solid rgba(255,215,0,0.15); padding-bottom: 8px; margin: 28px 0 16px;">Partnership Interest</div>
+
+            <div class="form-group">
+              <label>Sponsorship Tier Interest</label>
+              <div class="tier-select-grid">
+                <div class="tier-option">
+                  <input type="radio" name="tier" id="tier-title" value="title">
+                  <label class="tier-option-card" for="tier-title">
+                    <div class="tier-opt-name">👑 Title Sponsor</div>
+                    <div class="tier-opt-price">$100K–$200K</div>
+                    <div class="tier-opt-desc">Exclusive naming rights, full branding</div>
+                  </label>
+                </div>
+                <div class="tier-option">
+                  <input type="radio" name="tier" id="tier-presenting" value="presenting">
+                  <label class="tier-option-card" for="tier-presenting">
+                    <div class="tier-opt-name">🌟 Presenting Sponsor</div>
+                    <div class="tier-opt-price">$50K–$75K</div>
+                    <div class="tier-opt-desc">Prominent branding, livestream segments</div>
+                  </label>
+                </div>
+                <div class="tier-option">
+                  <input type="radio" name="tier" id="tier-gold" value="gold">
+                  <label class="tier-option-card" for="tier-gold">
+                    <div class="tier-opt-name">🥇 Gold Sponsor</div>
+                    <div class="tier-opt-price">$25K</div>
+                    <div class="tier-opt-desc">Venue signage, website, social</div>
+                  </label>
+                </div>
+                <div class="tier-option">
+                  <input type="radio" name="tier" id="tier-silver" value="silver">
+                  <label class="tier-option-card" for="tier-silver">
+                    <div class="tier-opt-name">🥈 Silver / In-Kind</div>
+                    <div class="tier-opt-price">$10K or in-kind</div>
+                    <div class="tier-opt-desc">Digital presence, product placement</div>
+                  </label>
+                </div>
+                <div class="tier-option">
+                  <input type="radio" name="tier" id="tier-media" value="media">
+                  <label class="tier-option-card" for="tier-media">
+                    <div class="tier-opt-name">📺 Media Partner</div>
+                    <div class="tier-opt-price">Exchange</div>
+                    <div class="tier-opt-desc">Coverage for exclusive content access</div>
+                  </label>
+                </div>
+                <div class="tier-option">
+                  <input type="radio" name="tier" id="tier-custom" value="custom">
+                  <label class="tier-option-card" for="tier-custom">
+                    <div class="tier-opt-name">✨ Custom Package</div>
+                    <div class="tier-opt-price">Let's talk</div>
+                    <div class="tier-opt-desc">Tailored to your brand's needs</div>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="spBudget">Budget Range</label>
+              <select id="spBudget">
+                <option value="">Select range...</option>
+                <option value="under_10k">Under $10K</option>
+                <option value="10k_25k">$10K – $25K</option>
+                <option value="25k_50k">$25K – $50K</option>
+                <option value="50k_100k">$50K – $100K</option>
+                <option value="100k_200k">$100K – $200K</option>
+                <option value="200k_plus">$200K+</option>
+                <option value="in_kind">In-Kind / Service Exchange</option>
+              </select>
+            </div>
+
+            <!-- Goals -->
+            <div style="font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); border-bottom: 1px solid rgba(255,215,0,0.15); padding-bottom: 8px; margin: 28px 0 16px;">Partnership Goals</div>
+            <p style="font-size: 0.85rem; color: var(--gray-light); margin-bottom: 14px;">What does your brand hope to achieve? (Select all that apply)</p>
+
+            <div class="form-group checkbox-group">
+              <label class="checkbox-label">
+                <input type="checkbox" name="goal" value="brand_visibility">
+                <span>Brand visibility and awareness (Times Square, livestream, media)</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="goal" value="csr_mental_health">
+                <span>CSR alignment with Gen-Z mental health advocacy</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="goal" value="gwr_association">
+                <span>Guinness World Record association and documentation</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="goal" value="gen_z_audience">
+                <span>Reach and engagement with Gen-Z audience</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="goal" value="product_placement">
+                <span>Product placement or sampling opportunity</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="goal" value="content_rights">
+                <span>Content creation rights and social media assets</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="goal" value="employee_engagement">
+                <span>Employee engagement / VIP event access</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="goal" value="nyc_activation">
+                <span>NYC market activation and foot traffic exposure</span>
+              </label>
+            </div>
+
+            <!-- Message -->
+            <div style="margin-top: 28px;" class="form-group">
+              <label for="spMessage">Tell Us More</label>
+              <textarea id="spMessage" placeholder="Any questions, custom ideas, specific products or campaigns you'd like to integrate, timing requirements, etc."></textarea>
+            </div>
+
+            <input type="hidden" id="spUtmSource">
+            <input type="hidden" id="spUtmMedium">
+            <input type="hidden" id="spUtmCampaign">
+
+            <div class="submit-area">
+              <button type="submit" class="btn btn-gold" id="submitBtn" style="background: linear-gradient(135deg, rgba(255,215,0,0.2), rgba(255,215,0,0.1)); border: 1px solid rgba(255,215,0,0.4); color: var(--gold);">Submit Sponsorship Inquiry</button>
+              <p class="form-note">Our partnerships team responds within 2 business days with a custom proposal. Inquiries are confidential.</p>
+            </div>
+          </form>
+        </div>
+
+        <!-- Success state -->
+        <div id="successState">
+          <div class="success-icon">🤝</div>
+          <h3 style="margin-bottom: 12px;">Inquiry Received!</h3>
+          <p style="margin-bottom: 8px; max-width: 440px; margin-left: auto; margin-right: auto; color: var(--gray-light);">Thank you for your interest in partnering with Sing Until Nobody's Gone! Our partnerships team will be in touch within 2 business days with a tailored sponsorship proposal.</p>
+          <p style="font-size: 0.85rem; color: var(--gray); margin-bottom: 28px;">In the meantime, feel free to review our <a href="press.html#sponsorship-deck" style="color: var(--blue);">sponsorship deck</a> or reach out directly at <a href="mailto:sponsors@sungclub.com" style="color: var(--blue);">sponsors@sungclub.com</a>.</p>
+          <a href="index.html" class="btn btn-outline">Back to Home</a>
+        </div>
+
+      </div>
+
+      <!-- Contact fallback -->
+      <div style="text-align: center; margin-top: 24px;">
+        <p style="font-size: 0.875rem; color: var(--gray);">Prefer email? Reach us directly at <a href="mailto:sponsors@sungclub.com" style="color: var(--gold);">sponsors@sungclub.com</a> or <a href="press.html#sponsorship-deck" style="color: var(--gold);">download our sponsorship deck</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background: var(--bg); border-top: 1px solid rgba(255,255,255,0.06); padding: 40px 0; text-align: center; margin-top: 0;">
+  <div class="container">
+    <div class="nav-logo" style="justify-content: center; margin-bottom: 16px; display: flex; gap: 8px; align-items: center;">
+      <span class="mic">🎤</span> <strong>Sing Until Nobody's Gone</strong>
+    </div>
+    <p style="font-size: 0.85rem; margin-bottom: 8px;">June 12 – July 19, 2026 · Times Square, New York City</p>
+    <p style="font-size: 0.8rem; color: var(--gray);">
+      <a href="index.html">Home</a> · <a href="participate.html">Participate</a> · <a href="volunteer.html">Volunteer</a> · <a href="crowdfunding.html">Crowdfunding</a> · <a href="press.html">Press</a> · <a href="faq.html">FAQ</a>
+    </p>
+  </div>
+</footer>
+
+<script>
+  // Hamburger
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+
+  // UTM capture
+  const params = new URLSearchParams(location.search);
+  document.getElementById('spUtmSource').value = params.get('utm_source') || '';
+  document.getElementById('spUtmMedium').value = params.get('utm_medium') || '';
+  document.getElementById('spUtmCampaign').value = params.get('utm_campaign') || '';
+  const SUNLOG_API = params.get('api') || 'https://sunlog.onrender.com';
+
+  // Pre-select tier from URL
+  const tierParam = params.get('tier');
+  if (tierParam) {
+    const radio = document.querySelector(`input[name="tier"][value="${tierParam}"]`);
+    if (radio) radio.checked = true;
+  }
+
+  // Form validation + submit
+  document.getElementById('sponsorForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const company = document.getElementById('spCompany').value.trim();
+    const contact = document.getElementById('spContact').value.trim();
+    const email = document.getElementById('spEmail').value.trim();
+
+    let valid = true;
+    const setErr = (id, hasErr) => {
+      const fg = document.getElementById(id);
+      if (fg) fg.classList.toggle('field-error', hasErr);
+      if (hasErr) valid = false;
+    };
+
+    setErr('fg-company', !company);
+    setErr('fg-contact', !contact);
+    setErr('fg-email', !email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email));
+
+    if (!valid) return;
+
+    const btn = document.getElementById('submitBtn');
+    btn.textContent = 'Submitting...';
+    btn.disabled = true;
+
+    const tierRadio = document.querySelector('input[name="tier"]:checked');
+    const goals = [...document.querySelectorAll('input[name="goal"]:checked')].map(c => c.value);
+
+    const body = {
+      companyName: company,
+      contactName: contact,
+      email,
+      phone: document.getElementById('spPhone').value.trim() || undefined,
+      tierInterest: tierRadio ? tierRadio.value : undefined,
+      budgetRange: document.getElementById('spBudget').value || undefined,
+      goals: goals.length ? goals : undefined,
+      message: document.getElementById('spMessage').value.trim() || undefined,
+      utmSource: document.getElementById('spUtmSource').value || undefined,
+      utmMedium: document.getElementById('spUtmMedium').value || undefined,
+      utmCampaign: document.getElementById('spUtmCampaign').value || undefined,
+    };
+
+    try {
+      const r = await fetch(`${SUNLOG_API}/api/sponsor-inquiries`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      });
+      const d = await r.json();
+      if (!r.ok) throw new Error(d.error || 'Submission failed');
+    } catch (_) {
+      // Offline queue
+      const pending = JSON.parse(localStorage.getItem('sun_pending_forms') || '[]');
+      pending.push({ url: `${SUNLOG_API}/api/sponsor-inquiries`, body });
+      localStorage.setItem('sun_pending_forms', JSON.stringify(pending));
+    }
+
+    document.getElementById('formState').style.display = 'none';
+    document.getElementById('successState').style.display = 'block';
+  });
+
+  // Offline retry on reconnect
+  window.addEventListener('online', () => {
+    const pending = JSON.parse(localStorage.getItem('sun_pending_forms') || '[]');
+    pending.forEach(({ url, body }) => {
+      fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }).catch(() => {});
+    });
+    if (pending.length) localStorage.removeItem('sun_pending_forms');
+  });
+</script>
+</body>
+</html>

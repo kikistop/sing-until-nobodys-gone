@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Volunteer — Sing Until Nobody's Gone</title>
+  <meta name="description" content="Volunteer for the world's longest karaoke marathon in Times Square. Sign up to be an official witness, shift coordinator, or event support volunteer.">
+  <meta property="og:title" content="Volunteer — Sing Until Nobody's Gone">
+  <meta property="og:description" content="Help make 38 days of non-stop karaoke happen. Official witnesses, shift coordinators, and event support volunteers needed for June 12–July 19, 2026.">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    .vol-form-wrap { max-width: 700px; margin: 0 auto; }
+    .form-card {
+      background: var(--bg2);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 40px 36px;
+    }
+    .form-group { margin-bottom: 20px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    label { display: block; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--gray-light); margin-bottom: 6px; }
+    label span.req { color: var(--pink); }
+    input[type="text"], input[type="email"], input[type="tel"], select, textarea {
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      color: var(--white);
+      font-size: 0.95rem;
+      font-family: inherit;
+      padding: 10px 14px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    input:focus, select:focus, textarea:focus { border-color: rgba(0,212,255,0.4); }
+    input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.3); }
+    select option { background: #1a1a2e; }
+    textarea { resize: vertical; min-height: 90px; }
+    .error-msg { font-size: 0.8rem; color: var(--pink); margin-top: 4px; display: none; }
+    .field-error input, .field-error select, .field-error textarea { border-color: var(--pink); }
+    .field-error .error-msg { display: block; }
+
+    /* Shift Calendar */
+    .shift-calendar { overflow-x: auto; margin-top: 8px; }
+    .shift-table { border-collapse: collapse; min-width: 100%; }
+    .shift-table th {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gray);
+      padding: 6px 10px;
+      text-align: center;
+      white-space: nowrap;
+    }
+    .shift-table td { padding: 3px 4px; }
+    .shift-cell {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .shift-check {
+      width: 28px; height: 28px;
+      border-radius: 6px;
+      border: 1.5px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.03);
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem;
+      transition: all 0.15s;
+      user-select: none;
+    }
+    .shift-check:hover { border-color: rgba(0,212,255,0.4); background: rgba(0,212,255,0.06); }
+    .shift-check.selected { background: rgba(0,212,255,0.2); border-color: var(--blue); color: var(--blue); }
+    .shift-check.selected::after { content: "✓"; font-weight: 700; }
+    .shift-summary { font-size: 0.8rem; color: var(--blue); margin-top: 8px; }
+    .week-label {
+      font-size: 0.65rem;
+      color: var(--gray);
+      text-align: left;
+      padding: 4px 4px 2px;
+    }
+    .cal-nav { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+    .cal-nav button {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 6px;
+      color: var(--white);
+      padding: 4px 12px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.85rem;
+    }
+    .cal-nav button:hover { background: rgba(255,255,255,0.1); }
+    .cal-nav span { font-weight: 600; font-size: 0.9rem; flex: 1; text-align: center; }
+
+    .checkbox-group label {
+      display: flex; align-items: flex-start; gap: 10px;
+      text-transform: none; letter-spacing: 0;
+      font-size: 0.9rem; font-weight: 400; cursor: pointer;
+      color: var(--gray-light); margin-bottom: 4px;
+    }
+    .checkbox-group input[type="checkbox"] { width: 16px; height: 16px; flex-shrink: 0; margin-top: 2px; accent-color: var(--blue); }
+    .submit-area { margin-top: 28px; }
+    .submit-area .btn { width: 100%; font-size: 1rem; padding: 14px; }
+    .form-note { font-size: 0.8rem; color: var(--gray); margin-top: 10px; text-align: center; }
+
+    /* Success state */
+    #successState { display: none; text-align: center; padding: 48px 0; }
+    #successState .success-icon { font-size: 3rem; margin-bottom: 16px; }
+
+    @media (max-width: 640px) {
+      .form-card { padding: 24px 16px; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">
+      <span class="mic">🎤</span> SUN
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="participate.html">Participate</a></li>
+      <li><a href="volunteer.html" style="color: var(--blue);">Volunteer</a></li>
+      <li><a href="crowdfunding.html">Crowdfunding</a></li>
+      <li><a href="sponsors.html">Sponsors</a></li>
+      <li><a href="night-owl.html">Night Owl</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="signup.html" class="nav-cta">Sign Up to Sing</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">☰</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section style="padding-top: 120px; background: var(--bg);">
+  <div class="container">
+    <div class="section-header" style="margin-bottom: 48px;">
+      <div class="label" style="color: var(--blue);">Volunteer Sign-Up</div>
+      <h1>Be Part of <span class="gradient-text">History</span></h1>
+      <p style="max-width: 560px; margin: 16px auto 0;">We need 100+ official witnesses, shift coordinators, and event support volunteers to make 38 days of non-stop karaoke happen. Join us June 12 – July 19, 2026.</p>
+    </div>
+
+    <!-- Role cards -->
+    <div class="grid-3" style="margin-bottom: 64px;">
+      <div class="card" style="text-align: center;">
+        <div style="font-size: 2rem; margin-bottom: 12px;">🔍</div>
+        <h4 style="color: var(--white); margin-bottom: 8px;">Official Witness</h4>
+        <p style="font-size: 0.875rem;">Required by Guinness World Records. Observe and log performances, sign official declarations. Must be independent (not a singer or staff). 8-hour shifts.</p>
+      </div>
+      <div class="card" style="text-align: center;">
+        <div style="font-size: 2rem; margin-bottom: 12px;">📋</div>
+        <h4 style="color: var(--white); margin-bottom: 8px;">Shift Coordinator</h4>
+        <p style="font-size: 0.875rem;">Manage singer handoffs, ensure no singing gaps, coordinate with the event team. 4-6 coordinators needed across all 228 shifts.</p>
+      </div>
+      <div class="card" style="text-align: center;">
+        <div style="font-size: 2rem; margin-bottom: 12px;">🤝</div>
+        <h4 style="color: var(--white); margin-bottom: 8px;">Event Support</h4>
+        <p style="font-size: 0.875rem;">Welcome singers, handle check-in/check-out, support the audience, keep Times Square flowing smoothly throughout the 912 hours.</p>
+      </div>
+    </div>
+
+    <!-- FORM -->
+    <div class="vol-form-wrap">
+      <div class="form-card" id="formCard">
+
+        <div id="formState">
+          <h3 style="margin-bottom: 6px;">Volunteer Application</h3>
+          <p style="font-size: 0.875rem; color: var(--gray); margin-bottom: 28px;">Fields marked <span style="color: var(--pink);">*</span> are required. We'll be in touch with shift confirmation and training details.</p>
+
+          <form id="volForm" novalidate>
+            <!-- Contact Info -->
+            <div style="font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue); border-bottom: 1px solid rgba(0,212,255,0.15); padding-bottom: 8px; margin-bottom: 20px;">Contact Information</div>
+
+            <div class="form-row">
+              <div class="form-group" id="fg-name">
+                <label for="volName">Full Name <span class="req">*</span></label>
+                <input type="text" id="volName" placeholder="Your name" autocomplete="name" required>
+                <div class="error-msg">Name is required.</div>
+              </div>
+              <div class="form-group" id="fg-email">
+                <label for="volEmail">Email Address <span class="req">*</span></label>
+                <input type="email" id="volEmail" placeholder="you@example.com" autocomplete="email" required>
+                <div class="error-msg">Valid email required.</div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="volPhone">Phone Number</label>
+                <input type="tel" id="volPhone" placeholder="+1 (555) 000-0000" autocomplete="tel">
+              </div>
+              <div class="form-group" id="fg-role">
+                <label for="volRole">Role Preference <span class="req">*</span></label>
+                <select id="volRole" required>
+                  <option value="">Select a role...</option>
+                  <option value="official_witness">Official Witness (GWR required)</option>
+                  <option value="shift_coordinator">Shift Coordinator</option>
+                  <option value="event_support">Event Support</option>
+                  <option value="any">Open to Any Role</option>
+                </select>
+                <div class="error-msg">Please select a role preference.</div>
+              </div>
+            </div>
+
+            <!-- Shift Availability -->
+            <div style="font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue); border-bottom: 1px solid rgba(0,212,255,0.15); padding-bottom: 8px; margin: 28px 0 16px;">Shift Availability</div>
+
+            <p style="font-size: 0.85rem; color: var(--gray-light); margin-bottom: 12px;">Select any days and time blocks you're available. Each block is an 8-hour shift. <strong style="color: var(--white);">Morning</strong> = 7am–3pm, <strong style="color: var(--white);">Prime</strong> = 3pm–11pm, <strong style="color: var(--white);">Night Owl</strong> = 11pm–7am.</p>
+
+            <div class="cal-nav">
+              <button type="button" id="calPrev">← Prev</button>
+              <span id="calWeekLabel">Week 1 (Jun 12–18)</span>
+              <button type="button" id="calNext">Next →</button>
+            </div>
+
+            <div class="shift-calendar">
+              <table class="shift-table" id="shiftTable">
+                <thead>
+                  <tr>
+                    <th style="text-align:left; padding-left:4px;">Shift</th>
+                    <th id="th-0">—</th><th id="th-1">—</th><th id="th-2">—</th><th id="th-3">—</th>
+                    <th id="th-4">—</th><th id="th-5">—</th><th id="th-6">—</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td style="font-size:0.75rem; color:var(--gray); padding: 3px 8px; white-space:nowrap;">🌅 Morning</td>
+                    <td><div class="shift-cell"><div class="shift-check" data-block="morning" data-col="0"></div></div></td>
+                    <td><div class="shift-cell"><div class="shift-check" data-block="morning" data-col="1"></div></div></td>
+                    <td><div class="shift-cell"><div class="shift-check" data-block="morning" data-col="2"></div></div></td>
+                    <td><div class="shift-cell"><div class="shift-check" data-block="morning" data-col="3"></div></div></td>
+                    <td><div class="shift-cell"><div class="shift-check" data-block="morning" data-col="4"></div></div></td>
+                    <td><div class="shift-cell"><div class="shift-check" data-block="morning" data-col="5"></div></div></td>
+                    <td><div class="shift-cell"><div class="shift-check" data-block="morning" data-col="6"></div></div></td>
+                  </tr>
+                  <tr>
+                    <td style="font-size:0.75rem; color:var(--gray); padding: 3px 8px; white-space:nowrap;">⭐ Prime</td>
+                    <td><div class="shift-cell"><div class="shift-check" data-block="prime" data-col="0"></div></div></td>
+                    <td><div class="shift-cell"><div class="shift-check" data-block="prime" data-col="1"></div></div></td>
+                    <td><div class="shift-cell"><div class="shift-check" data-block="prime" data-col="2"></div></div></td>
+                    <td><div class="shift-cell"><div class="shift-check" data-block="prime" data-col="3"></div></div></td>
+                    <td><div class="shift-cell"><div class="shift-check" data-block="prime" data-col="4"></div></div></td>
+                    <td><div class="shift-cell"><div class="shift-check" data-block="prime" data-col="5"></div></div></td>
+                    <td><div class="shift-cell"><div class="shift-check" data-block="prime" data-col="6"></div></div></td>
+                  </tr>
+                  <tr>
+                    <td style="font-size:0.75rem; color:var(--gray); padding: 3px 8px; white-space:nowrap;">🦉 Night Owl</td>
+                    <td><div class="shift-cell"><div class="shift-check" data-block="night_owl" data-col="0"></div></div></td>
+                    <td><div class="shift-cell"><div class="shift-check" data-block="night_owl" data-col="1"></div></div></td>
+                    <td><div class="shift-cell"><div class="shift-check" data-block="night_owl" data-col="2"></div></div></td>
+                    <td><div class="shift-cell"><div class="shift-check" data-block="night_owl" data-col="3"></div></div></td>
+                    <td><div class="shift-cell"><div class="shift-check" data-block="night_owl" data-col="4"></div></div></td>
+                    <td><div class="shift-cell"><div class="shift-check" data-block="night_owl" data-col="5"></div></div></td>
+                    <td><div class="shift-cell"><div class="shift-check" data-block="night_owl" data-col="6"></div></div></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="shift-summary" id="shiftSummary">No shifts selected yet.</div>
+
+            <!-- Experience -->
+            <div style="font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue); border-bottom: 1px solid rgba(0,212,255,0.15); padding-bottom: 8px; margin: 28px 0 16px;">Experience & Details</div>
+
+            <div class="form-group">
+              <label for="volExperience">Relevant Experience</label>
+              <textarea id="volExperience" placeholder="e.g. previous event volunteering, crowd management, witness/notary experience, overnight availability, etc."></textarea>
+            </div>
+
+            <div class="form-group" id="fg-emergency">
+              <label for="volEmergency">Emergency Contact <span class="req">*</span></label>
+              <input type="text" id="volEmergency" placeholder="Name and phone number, e.g. Jane Smith, +1 (555) 123-4567" required>
+              <div class="error-msg">Emergency contact required.</div>
+            </div>
+
+            <!-- Training Agreement -->
+            <div style="font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue); border-bottom: 1px solid rgba(0,212,255,0.15); padding-bottom: 8px; margin: 28px 0 16px;">Training Agreement</div>
+
+            <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 10px; padding: 16px; margin-bottom: 16px; font-size: 0.875rem; color: var(--gray-light);">
+              <strong style="color: var(--white);">Volunteer Training Requirements:</strong>
+              <ul style="margin-top: 10px; padding-left: 20px; display: flex; flex-direction: column; gap: 6px;">
+                <li>2 online training sessions (1 hour each, scheduled May–June 2026)</li>
+                <li>1 on-site orientation at Times Square venue (June 10–11)</li>
+                <li>Briefing specific to your assigned role and shifts</li>
+                <li>All training is provided free of charge</li>
+              </ul>
+            </div>
+
+            <div class="form-group checkbox-group" id="fg-training">
+              <label>
+                <input type="checkbox" id="volTraining">
+                <span>I agree to attend the required training sessions. I understand this is a volunteer position and that I must be independent (not a participant in the karaoke event, not a family member of organizers) to serve as an Official Witness. <span class="req">*</span></span>
+              </label>
+              <div class="error-msg" style="margin-left: 26px;">You must agree to training requirements to apply.</div>
+            </div>
+
+            <!-- Hidden UTM fields -->
+            <input type="hidden" id="volUtmSource">
+            <input type="hidden" id="volUtmMedium">
+            <input type="hidden" id="volUtmCampaign">
+
+            <div class="submit-area">
+              <button type="submit" class="btn btn-primary" id="submitBtn">Submit Volunteer Application</button>
+              <p class="form-note">We'll email you within 2–3 business days with next steps and training details.</p>
+            </div>
+          </form>
+        </div>
+
+        <!-- Success state -->
+        <div id="successState">
+          <div class="success-icon">🙌</div>
+          <h3 style="margin-bottom: 12px;">Application Received!</h3>
+          <p style="margin-bottom: 20px; max-width: 400px; margin-left: auto; margin-right: auto;">Thank you for volunteering! We'll be in touch within 2–3 business days with shift confirmation and training session details.</p>
+          <a href="index.html" class="btn btn-outline">Back to Home</a>
+        </div>
+
+      </div>
+
+      <!-- Admin link (subtle) -->
+      <p style="text-align:center; margin-top: 16px; font-size: 0.75rem; color: var(--gray);">
+        Volunteer coordinator? <a href="https://sunlog.onrender.com/api/volunteers" style="color: var(--gray);" target="_blank">View all submissions</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background: var(--bg); border-top: 1px solid rgba(255,255,255,0.06); padding: 40px 0; text-align: center; margin-top: 64px;">
+  <div class="container">
+    <div class="nav-logo" style="justify-content: center; margin-bottom: 16px; display: flex; gap: 8px; align-items: center;">
+      <span class="mic">🎤</span> <strong>Sing Until Nobody's Gone</strong>
+    </div>
+    <p style="font-size: 0.85rem; margin-bottom: 8px;">June 12 – July 19, 2026 · Times Square, New York City</p>
+    <p style="font-size: 0.8rem; color: var(--gray);">
+      <a href="index.html">Home</a> · <a href="participate.html">Participate</a> · <a href="crowdfunding.html">Crowdfunding</a> · <a href="sponsors.html">Sponsors</a> · <a href="faq.html">FAQ</a>
+    </p>
+  </div>
+</footer>
+
+<script>
+  // Hamburger
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+
+  // UTM capture
+  const params = new URLSearchParams(location.search);
+  document.getElementById('volUtmSource').value = params.get('utm_source') || '';
+  document.getElementById('volUtmMedium').value = params.get('utm_medium') || '';
+  document.getElementById('volUtmCampaign').value = params.get('utm_campaign') || '';
+  const SUNLOG_API = params.get('api') || 'https://sunlog.onrender.com';
+
+  // Event dates: June 12 – July 19, 2026 = 38 days
+  const EVENT_START = new Date('2026-06-12');
+  const TOTAL_DAYS = 38;
+  const DAYS_PER_WEEK = 7;
+
+  // Calendar state
+  let currentWeek = 0; // 0-indexed
+  const totalWeeks = Math.ceil(TOTAL_DAYS / DAYS_PER_WEEK);
+  const selectedShifts = new Set();
+
+  function getDayLabel(dayNum) {
+    // dayNum is 1-indexed
+    const d = new Date(EVENT_START);
+    d.setDate(d.getDate() + dayNum - 1);
+    const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    const months = ['Jun','Jul'];
+    return `${days[d.getDay()]} ${d.getDate()}/${months[d.getMonth() - 5]}`;
+  }
+
+  function renderCalendar() {
+    const startDay = currentWeek * DAYS_PER_WEEK + 1;
+    const endDay = Math.min(startDay + DAYS_PER_WEEK - 1, TOTAL_DAYS);
+    const daysThisWeek = endDay - startDay + 1;
+
+    // Update week label
+    const sd = new Date(EVENT_START); sd.setDate(sd.getDate() + startDay - 1);
+    const ed = new Date(EVENT_START); ed.setDate(ed.getDate() + endDay - 1);
+    const mNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug'];
+    document.getElementById('calWeekLabel').textContent = `Week ${currentWeek + 1} (Day ${startDay}–${endDay}, ${mNames[sd.getMonth()]} ${sd.getDate()}–${mNames[ed.getMonth()]} ${ed.getDate()})`;
+
+    // Update column headers
+    for (let c = 0; c < DAYS_PER_WEEK; c++) {
+      const th = document.getElementById(`th-${c}`);
+      const dayN = startDay + c;
+      if (dayN > TOTAL_DAYS) {
+        th.textContent = '';
+        th.style.display = 'none';
+      } else {
+        th.style.display = '';
+        th.innerHTML = `<span style="font-size:0.65rem;">Day ${dayN}</span><br><span style="font-size:0.6rem; color:var(--gray)">${getDayLabel(dayN)}</span>`;
+      }
+    }
+
+    // Update shift cells
+    document.querySelectorAll('.shift-check').forEach(cell => {
+      const col = parseInt(cell.dataset.col);
+      const block = cell.dataset.block;
+      const dayN = startDay + col;
+      cell.dataset.day = dayN;
+
+      if (dayN > TOTAL_DAYS) {
+        cell.style.visibility = 'hidden';
+      } else {
+        cell.style.visibility = 'visible';
+        const key = `${dayN}-${block}`;
+        cell.classList.toggle('selected', selectedShifts.has(key));
+      }
+    });
+
+    // Nav buttons
+    document.getElementById('calPrev').disabled = currentWeek === 0;
+    document.getElementById('calNext').disabled = currentWeek >= totalWeeks - 1;
+
+    updateShiftSummary();
+  }
+
+  function updateShiftSummary() {
+    const n = selectedShifts.size;
+    document.getElementById('shiftSummary').textContent = n === 0
+      ? 'No shifts selected yet.'
+      : `${n} shift${n > 1 ? 's' : ''} selected across ${new Set([...selectedShifts].map(s => s.split('-')[0])).size} day(s).`;
+  }
+
+  // Shift click handler
+  document.querySelectorAll('.shift-check').forEach(cell => {
+    cell.addEventListener('click', () => {
+      const key = `${cell.dataset.day}-${cell.dataset.block}`;
+      if (selectedShifts.has(key)) {
+        selectedShifts.delete(key);
+        cell.classList.remove('selected');
+      } else {
+        selectedShifts.add(key);
+        cell.classList.add('selected');
+      }
+      updateShiftSummary();
+    });
+  });
+
+  document.getElementById('calPrev').addEventListener('click', () => { currentWeek--; renderCalendar(); });
+  document.getElementById('calNext').addEventListener('click', () => { currentWeek++; renderCalendar(); });
+
+  renderCalendar();
+
+  // Form validation + submit
+  document.getElementById('volForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById('volName').value.trim();
+    const email = document.getElementById('volEmail').value.trim();
+    const role = document.getElementById('volRole').value;
+    const emergency = document.getElementById('volEmergency').value.trim();
+    const training = document.getElementById('volTraining').checked;
+
+    let valid = true;
+
+    const setErr = (id, hasErr) => {
+      const fg = document.getElementById(id);
+      if (fg) fg.classList.toggle('field-error', hasErr);
+      if (hasErr) valid = false;
+    };
+
+    setErr('fg-name', !name);
+    setErr('fg-email', !email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email));
+    setErr('fg-role', !role);
+    setErr('fg-emergency', !emergency);
+
+    const trainingFg = document.getElementById('fg-training');
+    if (!training) {
+      trainingFg.querySelector('.error-msg').style.display = 'block';
+      valid = false;
+    } else {
+      trainingFg.querySelector('.error-msg').style.display = 'none';
+    }
+
+    if (!valid) return;
+
+    const btn = document.getElementById('submitBtn');
+    btn.textContent = 'Submitting...';
+    btn.disabled = true;
+
+    const body = {
+      name,
+      email,
+      phone: document.getElementById('volPhone').value.trim() || undefined,
+      rolePreference: role,
+      shiftSelections: [...selectedShifts],
+      experience: document.getElementById('volExperience').value.trim() || undefined,
+      emergencyContact: emergency,
+      trainingAgreed: true,
+      utmSource: document.getElementById('volUtmSource').value || undefined,
+      utmMedium: document.getElementById('volUtmMedium').value || undefined,
+      utmCampaign: document.getElementById('volUtmCampaign').value || undefined,
+    };
+
+    try {
+      const r = await fetch(`${SUNLOG_API}/api/volunteers`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      });
+      const d = await r.json();
+      if (!r.ok) throw new Error(d.error || 'Submission failed');
+    } catch (err) {
+      // Offline queue
+      const pending = JSON.parse(localStorage.getItem('sun_pending_forms') || '[]');
+      pending.push({ url: `${SUNLOG_API}/api/volunteers`, body });
+      localStorage.setItem('sun_pending_forms', JSON.stringify(pending));
+    }
+
+    document.getElementById('formState').style.display = 'none';
+    document.getElementById('successState').style.display = 'block';
+  });
+
+  // Offline retry on reconnect
+  window.addEventListener('online', () => {
+    const pending = JSON.parse(localStorage.getItem('sun_pending_forms') || '[]');
+    pending.forEach(({ url, body }) => {
+      fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }).catch(() => {});
+    });
+    if (pending.length) localStorage.removeItem('sun_pending_forms');
+  });
+</script>
+</body>
+</html>
