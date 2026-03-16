@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up to Sing — Sing Until Nobody's Gone</title>
+  <meta name="description" content="Register for a 2-hour singing shift at the 38-day karaoke world record attempt in Times Square. All experience levels welcome.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">
+      <span class="mic">🎤</span> SUN
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#timeline">Dates</a></li>
+      <li><a href="index.html#sponsors">Sponsors</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="press.html">Press</a></li>
+      <li><a href="signup.html" class="nav-cta">Sign Up to Sing</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">☰</button>
+  </div>
+</nav>
+
+<!-- FORM PAGE -->
+<div class="form-page">
+  <div class="container">
+    <div class="form-header">
+      <div class="label">Volunteer Singer Application</div>
+      <h1>Join the <span class="gradient-text">World Record</span></h1>
+      <p>
+        Sign up for your 2-hour singing shift. All experience levels welcome —
+        first-timers to professional performers. No audition required.
+      </p>
+    </div>
+
+    <!-- Info bar -->
+    <div style="display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; margin-bottom: 40px;">
+      <div style="background: var(--bg2); border: 1px solid rgba(255,255,255,0.07); border-radius: 100px; padding: 8px 20px; font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+        <span style="color: var(--pink);">📍</span> Times Square, NYC
+      </div>
+      <div style="background: var(--bg2); border: 1px solid rgba(255,255,255,0.07); border-radius: 100px; padding: 8px 20px; font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+        <span style="color: var(--blue);">📅</span> June 12 – July 19, 2026
+      </div>
+      <div style="background: var(--bg2); border: 1px solid rgba(255,255,255,0.07); border-radius: 100px; padding: 8px 20px; font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+        <span style="color: var(--gold);">⏱</span> 2-Hour Shifts · Free to Join
+      </div>
+    </div>
+
+    <!-- FORM -->
+    <form
+      class="form-card"
+      name="participant-signup"
+      method="POST"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
+      id="signupForm"
+      action="/thank-you.html"
+    >
+      <input type="hidden" name="form-name" value="participant-signup">
+      <p style="display:none;"><label>Don't fill this out: <input name="bot-field"></label></p>
+
+      <!-- SECTION A: About You -->
+      <div class="form-section">
+        <div class="form-section-title">Section A — About You</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="firstName">First Name <span class="req">*</span></label>
+            <input type="text" id="firstName" name="firstName" required placeholder="Jane">
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name <span class="req">*</span></label>
+            <input type="text" id="lastName" name="lastName" required placeholder="Smith">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="email">Email Address <span class="req">*</span></label>
+            <input type="email" id="email" name="email" required placeholder="jane@example.com">
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number <span class="req">*</span></label>
+            <input type="tel" id="phone" name="phone" required placeholder="+1 (212) 555-0100">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="neighborhood">Neighborhood / Borough</label>
+            <input type="text" id="neighborhood" name="neighborhood" placeholder="Brooklyn, Queens, Manhattan...">
+          </div>
+          <div class="form-group">
+            <label for="howHeard">How did you hear about us? <span class="req">*</span></label>
+            <select id="howHeard" name="howHeard" required>
+              <option value="" disabled selected>Select one...</option>
+              <option value="instagram">Instagram</option>
+              <option value="tiktok">TikTok</option>
+              <option value="friend">Friend / Word of Mouth</option>
+              <option value="partner-org">Partner Organization</option>
+              <option value="flyer">Flyer / Poster</option>
+              <option value="press">News / Press Coverage</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION B: Your Singing -->
+      <div class="form-section">
+        <div class="form-section-title">Section B — Your Singing</div>
+        <div class="form-group">
+          <label>Experience Level <span class="req">*</span></label>
+          <div class="checkbox-group">
+            <label class="checkbox-item">
+              <input type="radio" name="experienceLevel" value="first-timer" required>
+              <span>🎤 First timer — I've never done karaoke before</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="radio" name="experienceLevel" value="karaoke-regular">
+              <span>🎵 Karaoke regular — I hit the bar circuit</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="radio" name="experienceLevel" value="trained-vocalist">
+              <span>🎼 Trained vocalist — I've had voice lessons</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="radio" name="experienceLevel" value="performer">
+              <span>🌟 Performer / musician — I perform regularly</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Have you performed publicly before?</label>
+          <div class="checkbox-group" style="flex-direction: row; gap: 24px;">
+            <label class="checkbox-item">
+              <input type="radio" name="publicPerformance" value="yes">
+              <span>Yes</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="radio" name="publicPerformance" value="no">
+              <span>No</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Songs You Plan to Sing <span class="req">*</span> <span style="font-weight: 400; color: var(--gray)">(list 2–5 songs — we'll build the queue from these)</span></label>
+          <div class="songs-grid">
+            <input type="text" name="song1" placeholder="Song 1 — Title & Artist" required>
+            <input type="text" name="song2" placeholder="Song 2 — Title & Artist">
+            <input type="text" name="song3" placeholder="Song 3 — Title & Artist">
+            <input type="text" name="song4" placeholder="Song 4 — Title & Artist">
+            <input type="text" name="song5" placeholder="Song 5 — Title & Artist">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="languages">Languages you can sing in</label>
+            <input type="text" id="languages" name="languages" placeholder="e.g. English, Korean, Spanish">
+          </div>
+          <div class="form-group">
+            <label for="avoidSongs">Songs / genres to avoid?</label>
+            <input type="text" id="avoidSongs" name="avoidSongs" placeholder="e.g. no explicit lyrics, no country">
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION C: Availability -->
+      <div class="form-section">
+        <div class="form-section-title">Section C — Availability</div>
+        <div class="form-group">
+          <label>Which weeks are you available? <span class="req">*</span> <span style="font-weight: 400; color: var(--gray)">(check all that apply)</span></label>
+          <div class="checkbox-group">
+            <label class="checkbox-item"><input type="checkbox" name="weeks" value="week1"><span>Week 1 — Jun 12–18, 2026</span></label>
+            <label class="checkbox-item"><input type="checkbox" name="weeks" value="week2"><span>Week 2 — Jun 19–25, 2026</span></label>
+            <label class="checkbox-item"><input type="checkbox" name="weeks" value="week3"><span>Week 3 — Jun 26 – Jul 2, 2026</span></label>
+            <label class="checkbox-item"><input type="checkbox" name="weeks" value="week4"><span>Week 4 — Jul 3–9, 2026</span></label>
+            <label class="checkbox-item"><input type="checkbox" name="weeks" value="week5"><span>Week 5 — Jul 10–16, 2026</span></label>
+            <label class="checkbox-item"><input type="checkbox" name="weeks" value="week6"><span>Week 6 — Jul 17–19, 2026</span></label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Preferred Time Block(s) <span class="req">*</span></label>
+          <div class="checkbox-group">
+            <label class="checkbox-item">
+              <input type="checkbox" name="timeBlocks" value="morning">
+              <span>☀️ Morning Shift (6am–2pm)</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="timeBlocks" value="primetime">
+              <span>🌆 Prime Time (2pm–10pm)</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="timeBlocks" value="nightowl">
+              <span>🌙 Night Owl (10pm–6am)</span>
+              <span class="badge">Featured on Socials!</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>How many 2-hour shifts can you commit to? <span class="req">*</span></label>
+          <select name="shiftsCommitted" required>
+            <option value="" disabled selected>Select...</option>
+            <option value="1">1 shift</option>
+            <option value="2-3">2–3 shifts</option>
+            <option value="4-6">4–6 shifts</option>
+            <option value="max">As many as possible</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Open to emergency gap-fill shifts? <span style="font-weight: 400; color: var(--gray)">(We'll text you if there's an urgent nearby opening)</span></label>
+          <div class="checkbox-group" style="flex-direction: row; gap: 24px;">
+            <label class="checkbox-item">
+              <input type="radio" name="gapFill" value="yes">
+              <span>Yes, text me</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="radio" name="gapFill" value="no">
+              <span>No thanks</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION D: Group Sign-Up -->
+      <div class="form-section">
+        <div class="form-section-title">Section D — Group Sign-Up (Optional)</div>
+        <div class="form-group">
+          <label>Signing up with a group?</label>
+          <div class="checkbox-group" style="flex-direction: row; gap: 24px;">
+            <label class="checkbox-item">
+              <input type="radio" name="isGroup" value="yes" id="isGroupYes">
+              <span>Yes</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="radio" name="isGroup" value="no" id="isGroupNo">
+              <span>No, just me</span>
+            </label>
+          </div>
+        </div>
+        <div class="form-row" id="groupFields" style="display: none;">
+          <div class="form-group">
+            <label for="groupName">Group / Organization Name</label>
+            <input type="text" id="groupName" name="groupName" placeholder="e.g. K-Pop NYC Fan Club">
+          </div>
+          <div class="form-group">
+            <label for="groupEmail">Group Contact Email</label>
+            <input type="email" id="groupEmail" name="groupEmail" placeholder="group@example.com">
+          </div>
+          <div class="form-group">
+            <label for="groupSize">Estimated Group Size</label>
+            <input type="number" id="groupSize" name="groupSize" placeholder="e.g. 8" min="2" max="100">
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION E: Final Questions -->
+      <div class="form-section">
+        <div class="form-section-title">Section E — Final Questions</div>
+        <div class="form-group">
+          <label for="accessibility">Accessibility needs or accommodations?</label>
+          <textarea id="accessibility" name="accessibility" placeholder="Let us know anything we should prepare for you..."></textarea>
+        </div>
+        <div class="form-group">
+          <label for="anythingElse">Anything else you'd like us to know?</label>
+          <textarea id="anythingElse" name="anythingElse" placeholder="Tell us about yourself, your musical style, or any questions..."></textarea>
+        </div>
+        <div class="form-group" style="margin-bottom: 0;">
+          <label class="checkbox-item" style="align-items: flex-start; cursor: default;">
+            <input type="checkbox" name="agreeGuidelines" required style="margin-top: 3px;">
+            <span>
+              I agree to the <a href="faq.html#guidelines" style="color: var(--pink);">Participant Guidelines</a> and understand the
+              Guinness World Records rules for this event. I confirm that my information is accurate
+              and that I will make every effort to attend my confirmed shift. <span class="req">*</span>
+            </span>
+          </label>
+        </div>
+      </div>
+
+      <!-- SUBMIT -->
+      <div class="form-submit">
+        <button type="submit" class="btn btn-primary">
+          🎤 Submit My Application
+        </button>
+        <p class="form-note">
+          You'll receive a confirmation email within 48 hours with your assigned shift time,
+          venue address, and a calendar invite. Questions? Email
+          <a href="mailto:volunteers@sungclub.com">volunteers@sungclub.com</a>
+        </p>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer style="margin-top: 80px;">
+  <div class="container">
+    <div style="font-size: 1.8rem; margin-bottom: 12px;">🎤</div>
+    <p style="font-weight: 700; color: var(--white); margin-bottom: 6px;">Sing Until Nobody's Gone</p>
+    <p style="margin-bottom: 24px;">June 12 – July 19, 2026 · Times Square, New York City</p>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="signup.html">Sign Up</a>
+      <a href="faq.html">FAQ</a>
+      <a href="press.html">Press</a>
+      <a href="mailto:volunteers@sungclub.com">Contact Volunteers Team</a>
+    </div>
+    <p>© 2026 Sing Until Nobody's Gone. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('hamburger').addEventListener('click', function() {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+
+  // Show/hide group fields
+  document.querySelectorAll('input[name="isGroup"]').forEach(function(radio) {
+    radio.addEventListener('change', function() {
+      document.getElementById('groupFields').style.display =
+        this.value === 'yes' ? 'grid' : 'none';
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Application Received — Sing Until Nobody's Gone</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html"><span class="mic">🎤</span> SUN</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="press.html">Press</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">☰</button>
+  </div>
+</nav>
+
+<div style="min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 80px 24px 40px;">
+  <div style="text-align: center; max-width: 560px;">
+    <div style="font-size: 5rem; margin-bottom: 24px;">🎤</div>
+    <div class="label" style="margin-bottom: 16px;">Application Received</div>
+    <h1 style="margin-bottom: 20px;">You're in the <span class="gradient-text">lineup!</span></h1>
+    <p style="font-size: 1.1rem; margin-bottom: 32px; color: var(--gray-light);">
+      Thank you for signing up! We'll review your application and send a confirmation
+      email within 48 hours with your confirmed shift time, venue details, and a calendar invite.
+    </p>
+    <div style="background: var(--bg2); border: 1px solid rgba(255,255,255,0.07); border-radius: 16px; padding: 28px; margin-bottom: 32px; text-align: left;">
+      <h4 style="color: white; margin-bottom: 16px;">What happens next:</h4>
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <div style="display: flex; gap: 12px; align-items: flex-start;">
+          <span style="color: var(--pink); font-weight: 700; flex-shrink: 0;">1.</span>
+          <p style="font-size: 0.9rem; margin: 0;">We'll review your application and match you to a shift that fits your availability.</p>
+        </div>
+        <div style="display: flex; gap: 12px; align-items: flex-start;">
+          <span style="color: var(--pink); font-weight: 700; flex-shrink: 0;">2.</span>
+          <p style="font-size: 0.9rem; margin: 0;">You'll receive a confirmation email within 48 hours with your confirmed shift details.</p>
+        </div>
+        <div style="display: flex; gap: 12px; align-items: flex-start;">
+          <span style="color: var(--pink); font-weight: 700; flex-shrink: 0;">3.</span>
+          <p style="font-size: 0.9rem; margin: 0;">On event day, arrive 15 minutes early, check in via QR code, and get ready to make history.</p>
+        </div>
+      </div>
+    </div>
+    <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+      <a href="index.html" class="btn btn-outline">← Back to Home</a>
+      <a href="faq.html" class="btn btn-primary">Read the FAQ</a>
+    </div>
+    <p style="margin-top: 24px; font-size: 0.875rem; color: var(--gray);">
+      Questions? <a href="mailto:volunteers@sungclub.com">volunteers@sungclub.com</a>
+    </p>
+  </div>
+</div>
+
+<script>
+  document.getElementById('hamburger').addEventListener('click', function() {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+</script>
+</body>
+</html>
