@@ -57,15 +57,14 @@
     <!-- FORM -->
     <form
       class="form-card"
-      name="participant-signup"
       method="POST"
-      data-netlify="true"
-      netlify-honeypot="bot-field"
+      action="https://formsubmit.co/volunteers@sungclub.com"
       id="signupForm"
-      action="/thank-you.html"
     >
-      <input type="hidden" name="form-name" value="participant-signup">
-      <p style="display:none;"><label>Don't fill this out: <input name="bot-field"></label></p>
+      <input type="hidden" name="_subject" value="New Singer Application — Sing Until Nobody's Gone">
+      <input type="hidden" name="_next" value="thank-you.html">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="text" name="_honey" style="display:none;">
 
       <!-- SECTION A: About You -->
       <div class="form-section">
