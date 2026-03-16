@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Early Access — Sing Until Nobody's Gone</title>
+  <meta name="description" content="Be the first to back the world's longest karaoke session. Join the early-access list for the April 17 crowdfunding launch — 38 days of non-stop karaoke in Times Square, June 2026.">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Be The First To Back The World's Longest Karaoke Session">
+  <meta property="og:description" content="38 days of non-stop karaoke in Times Square. A Guinness World Record attempt for Gen-Z mental health. Get early access to the crowdfunding campaign launching April 17.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://kikistop.github.io/early-access">
+  <meta property="og:image" content="https://kikistop.github.io/og-early-access.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Be The First To Back The World's Longest Karaoke Session">
+  <meta name="twitter:description" content="38 days of non-stop karaoke in Times Square. Get early access to the campaign launching April 17.">
+  <meta name="twitter:image" content="https://kikistop.github.io/og-early-access.png">
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    .early-hero {
+      padding-top: 140px;
+      padding-bottom: 0;
+      text-align: center;
+    }
+    .early-hero .label { margin-bottom: 16px; }
+    .early-hero h1 { margin-bottom: 20px; }
+    .early-hero .hero-sub {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      color: var(--gray-light);
+      max-width: 620px;
+      margin: 0 auto 40px;
+    }
+    .proof-bar {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 48px;
+    }
+    .proof-pill {
+      background: var(--bg2);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 100px;
+      padding: 8px 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .early-form-wrap {
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 0 0 80px;
+    }
+    .early-form-card {
+      background: var(--bg2);
+      border: 1px solid rgba(255,45,120,0.2);
+      border-radius: 20px;
+      padding: 40px 36px;
+      box-shadow: 0 0 60px rgba(255,45,120,0.08);
+    }
+    .early-form-card h2 {
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+    }
+    .early-form-card > p {
+      font-size: 0.9rem;
+      color: var(--gray);
+      margin-bottom: 28px;
+    }
+    .input-row {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .input-group label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--gray-light);
+    }
+    .input-group input {
+      background: var(--bg3);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      color: var(--white);
+      font-size: 1rem;
+      padding: 12px 16px;
+      font-family: inherit;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+    .input-group input:focus {
+      outline: none;
+      border-color: var(--pink);
+      box-shadow: 0 0 0 3px rgba(255,45,120,0.15);
+    }
+    .input-group input::placeholder { color: rgba(255,255,255,0.25); }
+    .submit-btn {
+      width: 100%;
+      justify-content: center;
+      font-size: 1.05rem;
+      padding: 15px 32px;
+      border-radius: 12px;
+      margin-top: 8px;
+    }
+    .error-msg {
+      background: rgba(255, 60, 60, 0.12);
+      border: 1px solid rgba(255, 60, 60, 0.3);
+      border-radius: 10px;
+      color: #ff8080;
+      font-size: 0.875rem;
+      padding: 12px 16px;
+      margin-top: 12px;
+      display: none;
+    }
+    .success-state {
+      display: none;
+      text-align: center;
+      padding: 20px 0;
+    }
+    .success-state .check { font-size: 3rem; margin-bottom: 16px; }
+    .success-state h3 { color: var(--white); font-size: 1.4rem; margin-bottom: 10px; }
+    .success-state p { font-size: 0.95rem; color: var(--gray-light); }
+    .share-links {
+      margin-top: 24px;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .share-links a {
+      background: var(--bg3);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 100px;
+      padding: 8px 18px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--gray-light);
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .share-links a:hover { border-color: var(--pink); color: var(--white); }
+    .why-section {
+      padding: 60px 0 80px;
+      text-align: center;
+    }
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 40px;
+      text-align: left;
+    }
+    .why-card {
+      background: var(--bg2);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: var(--radius);
+      padding: 28px;
+    }
+    .why-card .icon { font-size: 2rem; margin-bottom: 12px; }
+    .why-card h4 { margin-bottom: 8px; color: var(--white); }
+    .why-card p { font-size: 0.875rem; color: var(--gray); }
+    @media (max-width: 768px) {
+      .why-grid { grid-template-columns: 1fr; }
+      .early-form-card { padding: 28px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">
+      <span class="mic">🎤</span> SUN
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#timeline">Dates</a></li>
+      <li><a href="index.html#night-owl" style="color: var(--gold);">🦉 Night Owl Club</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="signup.html" class="nav-cta">Sign Up to Sing</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">☰</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="early-hero">
+  <div class="container">
+    <div class="label">🚀 Crowdfunding — Launching April 17</div>
+    <h1>Be The First To Back<br><span class="gradient-text">The World's Longest<br>Karaoke Session</span></h1>
+    <p class="hero-sub">
+      38 days of non-stop karaoke in Times Square. A Guinness World Record attempt
+      raising awareness for Gen-Z mental health. Our campaign launches April 17 —
+      get notified the moment it goes live.
+    </p>
+
+    <div class="proof-bar">
+      <div class="proof-pill"><span style="color:var(--pink);">📍</span> Times Square, NYC</div>
+      <div class="proof-pill"><span style="color:var(--blue);">📅</span> June 12 – July 19, 2026</div>
+      <div class="proof-pill"><span style="color:var(--gold);">🏆</span> Guinness World Record</div>
+      <div class="proof-pill"><span style="color:var(--purple-light);">💚</span> Gen-Z Mental Health</div>
+    </div>
+  </div>
+</section>
+
+<!-- FORM -->
+<div class="container">
+  <div class="early-form-wrap">
+    <div class="early-form-card">
+
+      <!-- Default form state -->
+      <div id="formState">
+        <h2>Get Early Access</h2>
+        <p>Join the list. We'll notify you the moment our crowdfunding campaign goes live — and early backers get first access.</p>
+
+        <form id="earlyAccessForm" novalidate>
+          <!-- Honeypot — bots fill this, humans don't -->
+          <input type="text" name="_honey" style="display:none;" tabindex="-1" autocomplete="off">
+
+          <div class="input-row">
+            <div class="input-group">
+              <label for="name">Your Name <span style="color:var(--gray);font-weight:400;">(optional)</span></label>
+              <input type="text" id="name" name="name" placeholder="Jane Smith" autocomplete="name">
+            </div>
+            <div class="input-group">
+              <label for="email">Email Address <span style="color:var(--pink);">*</span></label>
+              <input type="email" id="email" name="email" required placeholder="jane@example.com" autocomplete="email">
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary submit-btn" id="submitBtn">
+            Notify Me When It Launches →
+          </button>
+
+          <div class="error-msg" id="errorMsg"></div>
+        </form>
+
+        <p style="font-size:0.78rem;color:var(--gray);margin-top:16px;text-align:center;">
+          No spam. Just one email when we launch. Unsubscribe anytime.
+        </p>
+      </div>
+
+      <!-- Success state (shown after submit) -->
+      <div class="success-state" id="successState">
+        <div class="check">🎉</div>
+        <h3>You're in!</h3>
+        <p>We'll notify you the moment our campaign launches on April 17.<br>
+           Tell a friend — every voice counts.</p>
+        <div class="share-links">
+          <a href="https://twitter.com/intent/tweet?text=I%27m+backing+the+world%27s+longest+karaoke+session+in+Times+Square+%F0%9F%8E%A4+%E2%80%94+38+days+non-stop+for+mental+health.+Campaign+launches+April+17!+https%3A%2F%2Fkikistop.github.io%2Fearly-access" target="_blank" rel="noopener">🐦 Share on X</a>
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener">📸 Instagram</a>
+          <a href="signup.html">🎤 Sign Up to Sing</a>
+        </div>
+      </div>
+
+    </div><!-- /.early-form-card -->
+  </div>
+</div>
+
+<!-- WHY SECTION -->
+<section class="why-section">
+  <div class="container">
+    <div class="label">Why This Matters</div>
+    <h2>More Than a <span class="gradient-text">World Record</span></h2>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="icon">🎤</div>
+        <h4>38 Days Non-Stop</h4>
+        <p>June 12 to July 19, 2026 — 912 consecutive hours of live karaoke in the heart of Times Square. A Guinness World Record attempt.</p>
+      </div>
+      <div class="why-card">
+        <div class="icon">💚</div>
+        <h4>Mental Health Mission</h4>
+        <p>Every shift, every song raises awareness and funds for Gen-Z mental health. Music as a lifeline — community as a cure.</p>
+      </div>
+      <div class="why-card">
+        <div class="icon">🚀</div>
+        <h4>Campaign Launches April 17</h4>
+        <p>Our crowdfunding campaign goes live April 17. Early backers help us secure the venue, stage, and sound equipment needed to make history.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:var(--bg2);border-top:1px solid rgba(255,255,255,0.06);padding:40px 0;text-align:center;">
+  <div class="container">
+    <div style="font-weight:900;font-size:1.1rem;margin-bottom:12px;">🎤 SUN</div>
+    <p style="font-size:0.875rem;color:var(--gray);margin-bottom:16px;">
+      Sing Until Nobody's Gone · Times Square, NYC · June 12 – July 19, 2026
+    </p>
+    <div style="display:flex;gap:20px;justify-content:center;flex-wrap:wrap;font-size:0.85rem;">
+      <a href="index.html">Home</a>
+      <a href="signup.html">Sign Up to Sing</a>
+      <a href="faq.html">FAQ</a>
+      <a href="press.html">Press</a>
+      <a href="mailto:hello@sungclub.com">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  // Parse UTM params from URL
+  const params = new URLSearchParams(location.search);
+  const utmSource   = params.get('utm_source')   || '';
+  const utmMedium   = params.get('utm_medium')   || '';
+  const utmCampaign = params.get('utm_campaign') || '';
+
+  const form      = document.getElementById('earlyAccessForm');
+  const submitBtn = document.getElementById('submitBtn');
+  const errorMsg  = document.getElementById('errorMsg');
+  const formState    = document.getElementById('formState');
+  const successState = document.getElementById('successState');
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    // Honeypot check
+    if (form.elements['_honey'].value) return;
+
+    const email = document.getElementById('email').value.trim();
+    const name  = document.getElementById('name').value.trim();
+
+    if (!email) {
+      showError('Please enter your email address.');
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Joining…';
+    errorMsg.style.display = 'none';
+
+    const payload = { email, name: name || undefined };
+    if (utmSource) payload.source = utmSource;
+
+    try {
+      const resp = await fetch('https://sunlog.onrender.com/api/email-list', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      if (resp.ok) {
+        formState.style.display = 'none';
+        successState.style.display = 'block';
+      } else {
+        const data = await resp.json().catch(() => ({}));
+        showError(data.error || 'Something went wrong. Please try again.');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Notify Me When It Launches →';
+      }
+    } catch (err) {
+      showError('Could not connect. Please check your connection and try again.');
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Notify Me When It Launches →';
+    }
+  });
+
+  function showError(msg) {
+    errorMsg.textContent = msg;
+    errorMsg.style.display = 'block';
+  }
+
+  // Mobile nav
+  document.getElementById('hamburger').addEventListener('click', function () {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+})();
+</script>
+</body>
+</html>
