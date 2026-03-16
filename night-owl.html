@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Night Owl Club — Sing Until Nobody's Gone</title>
+  <meta name="description" content="The Night Owl Club — join the overnight singers keeping the Guinness World Record alive from 10pm to 7am in Times Square. Exclusive perks for the most critical shift.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    .night-hero {
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding-top: 64px;
+      background: linear-gradient(135deg, rgba(8,8,20,1) 0%, rgba(12,12,28,1) 100%);
+    }
+    .night-hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 30% 40%, rgba(255,215,0,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 50% at 80% 80%, rgba(0,212,255,0.05) 0%, transparent 60%);
+    }
+    .star-field {
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,0.6) 0%, transparent 100%),
+        radial-gradient(1px 1px at 60% 20%, rgba(255,255,255,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 80% 60%, rgba(255,255,255,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 40% 70%, rgba(255,255,255,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 10% 80%, rgba(255,255,255,0.4) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 70% 40%, rgba(255,255,255,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 50% 50%, rgba(255,255,255,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 90% 10%, rgba(255,255,255,0.6) 0%, transparent 100%);
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html"><span class="mic">🎤</span> SUN</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="participate.html">Participate</a></li>
+      <li><a href="night-owl.html">Night Owl</a></li>
+      <li><a href="index.html#merch">Merch</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="press.html">Press</a></li>
+      <li><a href="signup.html" class="nav-cta">Sign Up to Sing</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">☰</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="night-hero">
+  <div class="night-hero-bg"></div>
+  <div class="star-field"></div>
+  <div class="container" style="position: relative; z-index: 1; text-align: center; padding: 60px 0;">
+    <div class="hero-eyebrow" style="background: rgba(255,215,0,0.1); border-color: rgba(255,215,0,0.3); color: var(--gold);">
+      🦉 The Night Owl Club
+    </div>
+    <h1 style="margin-bottom: 24px;">
+      The Record Doesn't Sleep.<br>
+      <span style="color: var(--gold); text-shadow: 0 0 40px rgba(255,215,0,0.4);">Neither Do We.</span>
+    </h1>
+    <p class="hero-sub">
+      Every night from 10pm to 7am, a handful of singers keep the Guinness World Record alive.
+      Without Night Owls, the record ends. Join the club that makes it possible.
+    </p>
+    <div class="hero-ctas">
+      <a href="signup.html?block=nightowl&utm_source=night-owl-page&utm_medium=hero&utm_campaign=nightowl" class="btn btn-gold" style="font-size: 1.05rem; padding: 16px 40px;">
+        🦉 Join the Night Owl Club
+      </a>
+      <a href="#why-it-matters" class="btn btn-outline">Why overnight matters →</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="number" style="color: var(--gold);">10pm</div>
+        <div class="desc">Shift Starts</div>
+      </div>
+      <div class="hero-stat">
+        <div class="number" style="color: var(--gold);">7am</div>
+        <div class="desc">Shift Ends</div>
+      </div>
+      <div class="hero-stat">
+        <div class="number" style="color: var(--gold);">38</div>
+        <div class="desc">Nights to Fill</div>
+      </div>
+      <div class="hero-stat">
+        <div class="number" style="color: var(--gold);">4</div>
+        <div class="desc">Exclusive Perks</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- WHY IT MATTERS -->
+<section id="why-it-matters" style="background: var(--bg);">
+  <div class="container">
+    <div class="grid-2" style="gap: 64px; align-items: center;">
+      <div>
+        <div class="label" style="color: var(--gold); margin-bottom: 16px;">Why Overnight Matters</div>
+        <h2 style="margin-bottom: 24px;">The Most Critical <span style="color: var(--gold);">Shift</span></h2>
+        <p style="margin-bottom: 16px; font-size: 1.05rem; line-height: 1.8;">
+          A Guinness World Record for continuous karaoke means exactly that: <em>continuous</em>.
+          Not mostly continuous. Not almost continuous.
+        </p>
+        <p style="margin-bottom: 16px; font-size: 1.05rem; line-height: 1.8;">
+          Every hour of every night — from midnight to 6am — someone has to be on that stage singing.
+          No exceptions.
+        </p>
+        <p style="margin-bottom: 16px; font-size: 1.05rem; line-height: 1.8;">
+          Daytime shifts are easy to fill. Prime Time (2pm–10pm) practically sells itself — it's Times Square,
+          it's sunny, there's a crowd. But the overnight shift is a different story.
+        </p>
+        <p style="margin-bottom: 24px; font-size: 1.05rem; line-height: 1.8;">
+          The overnight shift (10pm–7am) is the hardest to fill and the most critical to the record.
+          Without Night Owls, the record attempt doesn't just slow down.
+          <strong style="color: var(--white); font-size: 1.1rem;">It ends.</strong>
+        </p>
+        <div style="background: rgba(255,215,0,0.06); border: 1px solid rgba(255,215,0,0.2); border-radius: 12px; padding: 20px;">
+          <div style="font-weight: 700; color: var(--gold); margin-bottom: 8px;">The math:</div>
+          <p style="font-size: 0.9rem; margin: 0;">38 nights × 9 hours per night = <strong style="color: var(--white);">342 overnight hours</strong> to fill. That's 152+ individual 2-hour slots that need real people. We need you.</p>
+        </div>
+      </div>
+      <div>
+        <div style="background: var(--bg2); border: 1px solid rgba(255,215,0,0.15); border-radius: 20px; padding: 40px;">
+          <div class="label" style="color: var(--gold); margin-bottom: 20px;">Who are Night Owls?</div>
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            <div style="display: flex; gap: 16px; align-items: center;">
+              <div style="font-size: 2rem; flex-shrink: 0;">🍺</div>
+              <div>
+                <div style="font-weight: 700; color: var(--white); margin-bottom: 4px;">Bar &amp; restaurant workers</div>
+                <p style="font-size: 0.875rem; margin: 0;">Off at midnight, karaoke-comfortable, energy to spare.</p>
+              </div>
+            </div>
+            <div style="display: flex; gap: 16px; align-items: center;">
+              <div style="font-size: 2rem; flex-shrink: 0;">🏥</div>
+              <div>
+                <div style="font-weight: 700; color: var(--white); margin-bottom: 4px;">Healthcare night-shifters</div>
+                <p style="font-size: 0.875rem; margin: 0;">You already have the schedule. Use it for something legendary.</p>
+              </div>
+            </div>
+            <div style="display: flex; gap: 16px; align-items: center;">
+              <div style="font-size: 2rem; flex-shrink: 0;">🎓</div>
+              <div>
+                <div style="font-weight: 700; color: var(--white); margin-bottom: 4px;">Students on summer break</div>
+                <p style="font-size: 0.875rem; margin: 0;">No 8am class. No finals. Times Square at 3am is actually incredible.</p>
+              </div>
+            </div>
+            <div style="display: flex; gap: 16px; align-items: center;">
+              <div style="font-size: 2rem; flex-shrink: 0;">📱</div>
+              <div>
+                <div style="font-weight: 700; color: var(--white); margin-bottom: 4px;">Content creators</div>
+                <p style="font-size: 0.875rem; margin: 0;">Times Square at 3am is a different world. Your footage will be unlike anything else.</p>
+              </div>
+            </div>
+            <div style="display: flex; gap: 16px; align-items: center;">
+              <div style="font-size: 2rem; flex-shrink: 0;">🎌</div>
+              <div>
+                <div style="font-weight: 700; color: var(--white); margin-bottom: 4px;">K-pop &amp; anime fans</div>
+                <p style="font-size: 0.875rem; margin: 0;">Late-night events are your natural habitat. And we have the song catalog to match.</p>
+              </div>
+            </div>
+            <div style="display: flex; gap: 16px; align-items: center;">
+              <div style="font-size: 2rem; flex-shrink: 0;">🌙</div>
+              <div>
+                <div style="font-weight: 700; color: var(--white); margin-bottom: 4px;">Night owls by nature</div>
+                <p style="font-size: 0.875rem; margin: 0;">Some people just don't sleep. This one's for you.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PERKS -->
+<section id="perks" style="background: var(--bg2);">
+  <div class="container">
+    <div class="section-header">
+      <div class="label" style="color: var(--gold);">Night Owl Club Benefits</div>
+      <h2>Exclusive Perks for <span style="color: var(--gold);">Night Owls</span></h2>
+      <p>Because the people keeping this record alive overnight deserve more than a pat on the back.</p>
+    </div>
+
+    <div class="grid-2" style="gap: 24px; margin-bottom: 56px;">
+      <div class="card" style="display: flex; gap: 24px; align-items: flex-start; padding: 28px; border-color: rgba(255,215,0,0.15);">
+        <div style="font-size: 2.5rem; flex-shrink: 0;">🎵</div>
+        <div>
+          <h3 style="color: var(--gold); margin-bottom: 10px;">Priority Song Selection</h3>
+          <p>Night Owls choose their songs before everyone else in the shift. You want to open with your all-time favorite? Done. No waiting, no compromises.</p>
+          <p style="font-size: 0.85rem; margin-top: 8px; color: var(--gray);">Submit your song list during registration and it will be pre-loaded when you arrive.</p>
+        </div>
+      </div>
+      <div class="card" style="display: flex; gap: 24px; align-items: flex-start; padding: 28px; border-color: rgba(255,215,0,0.15);">
+        <div style="font-size: 2.5rem; flex-shrink: 0;">👕</div>
+        <div>
+          <h3 style="color: var(--gold); margin-bottom: 10px;">Exclusive Night Owl Merch</h3>
+          <p>Complete 2 or more overnight shifts and receive the limited-edition Night Owl Club tee and sticker pack. Only Night Owls ever have this. Not available in any store.</p>
+          <p style="font-size: 0.85rem; margin-top: 8px; color: var(--gray);">Merch mailed after the event. Estimated value: $40.</p>
+        </div>
+      </div>
+      <div class="card" style="display: flex; gap: 24px; align-items: flex-start; padding: 28px; border-color: rgba(255,215,0,0.15);">
+        <div style="font-size: 2.5rem; flex-shrink: 0;">📱</div>
+        <div>
+          <h3 style="color: var(--gold); margin-bottom: 10px;">Social Media Spotlight</h3>
+          <p>Every overnight singer gets featured on the official SUN social accounts. We tell your story, share your performance, and tag you in. 38 nights of overnight content.</p>
+          <p style="font-size: 0.85rem; margin-top: 8px; color: var(--gray);">Mention your handles during registration and we'll make sure you get credit.</p>
+        </div>
+      </div>
+      <div class="card" style="display: flex; gap: 24px; align-items: flex-start; padding: 28px; border-color: rgba(255,215,0,0.15);">
+        <div style="font-size: 2.5rem; flex-shrink: 0;">🏆</div>
+        <div>
+          <h3 style="color: var(--gold); margin-bottom: 10px;">GWR Co-Breaker Credit</h3>
+          <p>Your name is permanently part of the Guinness World Record documentation. Every night you sing, the record holds because of you. Your name goes on the certificate.</p>
+          <p style="font-size: 0.85rem; margin-top: 8px; color: var(--gray);">All participants are credited, but Night Owls get special acknowledgment in the GWR submission.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Shift details -->
+    <div style="background: rgba(255,215,0,0.04); border: 1px solid rgba(255,215,0,0.12); border-radius: 20px; padding: 48px; text-align: center;">
+      <div class="label" style="color: var(--gold); margin-bottom: 20px;">Night Owl Shift Details</div>
+      <div style="display: flex; gap: 40px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px;">
+        <div>
+          <div style="font-size: 2.2rem; font-weight: 900; color: var(--gold);">10pm</div>
+          <div style="font-size: 0.85rem; color: var(--gray);">Shift starts</div>
+        </div>
+        <div style="border-left: 1px solid rgba(255,255,255,0.08); margin: 0 4px;"></div>
+        <div>
+          <div style="font-size: 2.2rem; font-weight: 900; color: var(--gold);">7am</div>
+          <div style="font-size: 0.85rem; color: var(--gray);">Shift ends</div>
+        </div>
+        <div style="border-left: 1px solid rgba(255,255,255,0.08); margin: 0 4px;"></div>
+        <div>
+          <div style="font-size: 2.2rem; font-weight: 900; color: var(--gold);">2 hrs</div>
+          <div style="font-size: 0.85rem; color: var(--gray);">Your slot</div>
+        </div>
+        <div style="border-left: 1px solid rgba(255,255,255,0.08); margin: 0 4px;"></div>
+        <div>
+          <div style="font-size: 2.2rem; font-weight: 900; color: var(--gold);">Edison</div>
+          <div style="font-size: 0.85rem; color: var(--gray);">Indoor venue</div>
+        </div>
+        <div style="border-left: 1px solid rgba(255,255,255,0.08); margin: 0 4px;"></div>
+        <div>
+          <div style="font-size: 2.2rem; font-weight: 900; color: var(--gold);">18+</div>
+          <div style="font-size: 0.85rem; color: var(--gray);">Age requirement</div>
+        </div>
+      </div>
+      <p style="max-width: 560px; margin: 0 auto 32px; font-size: 0.95rem; color: var(--gray-light);">
+        Night Owl shifts take place at the Edison Hotel Ballroom (228 W 47th St), just off Times Square.
+        Air-conditioned, fully equipped, and surrounded by fellow Night Owls keeping history alive.
+      </p>
+      <a href="signup.html?block=nightowl&utm_source=night-owl-page&utm_medium=cta&utm_campaign=nightowl"
+         class="btn btn-gold" style="font-size: 1.05rem; padding: 16px 40px;">
+        🦉 Join the Night Owl Club
+      </a>
+      <p style="font-size: 0.8rem; margin-top: 16px; color: var(--gray);">
+        Already signed up for a daytime shift? You can add an overnight slot — Night Owl perks stack.
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SPECIAL INCENTIVES -->
+<section style="background: var(--bg);">
+  <div class="container">
+    <div class="section-header">
+      <div class="label" style="color: var(--gold);">Go The Distance</div>
+      <h2>Multi-Night <span style="color: var(--gold);">Rewards</span></h2>
+      <p>The more nights you commit, the more you earn. Night Owls who come back are the backbone of the record.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card" style="text-align: center; padding: 32px; border-color: rgba(255,215,0,0.1);">
+        <div style="font-size: 3rem; margin-bottom: 16px;">🌙</div>
+        <div style="font-size: 2rem; font-weight: 900; color: var(--gold); margin-bottom: 8px;">1 Night</div>
+        <h4 style="color: var(--white); margin-bottom: 12px;">Night Owl Status</h4>
+        <ul style="list-style: none; padding: 0; text-align: left; display: flex; flex-direction: column; gap: 8px;">
+          <li style="font-size: 0.875rem; color: var(--gray-light);">✓ Priority song selection</li>
+          <li style="font-size: 0.875rem; color: var(--gray-light);">✓ Social media spotlight</li>
+          <li style="font-size: 0.875rem; color: var(--gray-light);">✓ GWR co-breaker credit</li>
+          <li style="font-size: 0.875rem; color: var(--gray-light);">✓ Night Owl Club membership</li>
+        </ul>
+      </div>
+      <div class="card" style="text-align: center; padding: 32px; border-color: rgba(255,215,0,0.25); position: relative; overflow: hidden;">
+        <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gold);"></div>
+        <div style="font-size: 3rem; margin-bottom: 16px;">🌙🌙</div>
+        <div style="font-size: 2rem; font-weight: 900; color: var(--gold); margin-bottom: 8px;">2 Nights</div>
+        <h4 style="color: var(--white); margin-bottom: 12px;">Night Owl Club Member</h4>
+        <ul style="list-style: none; padding: 0; text-align: left; display: flex; flex-direction: column; gap: 8px;">
+          <li style="font-size: 0.875rem; color: var(--gray-light);">✓ Everything from 1 night</li>
+          <li style="font-size: 0.875rem; color: var(--gold); font-weight: 600;">+ Exclusive Night Owl tee</li>
+          <li style="font-size: 0.875rem; color: var(--gold); font-weight: 600;">+ Night Owl sticker pack</li>
+          <li style="font-size: 0.875rem; color: var(--gray-light);">✓ Extended social feature</li>
+        </ul>
+      </div>
+      <div class="card" style="text-align: center; padding: 32px; border-color: rgba(255,215,0,0.15);">
+        <div style="font-size: 3rem; margin-bottom: 16px;">🌙🌙🌙</div>
+        <div style="font-size: 2rem; font-weight: 900; color: var(--gold); margin-bottom: 8px;">3+ Nights</div>
+        <h4 style="color: var(--white); margin-bottom: 12px;">Night Owl Legend</h4>
+        <ul style="list-style: none; padding: 0; text-align: left; display: flex; flex-direction: column; gap: 8px;">
+          <li style="font-size: 0.875rem; color: var(--gray-light);">✓ Everything from 2 nights</li>
+          <li style="font-size: 0.875rem; color: var(--gold); font-weight: 600;">+ "Legend" badge in GWR docs</li>
+          <li style="font-size: 0.875rem; color: var(--gold); font-weight: 600;">+ Featured in event recap</li>
+          <li style="font-size: 0.875rem; color: var(--gold); font-weight: 600;">+ Priority future event access</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FINAL CTA -->
+<section style="background: linear-gradient(135deg, rgba(15,12,0,1) 0%, rgba(8,8,20,1) 100%); text-align: center; padding: 80px 0;">
+  <div class="container">
+    <div style="font-size: 4rem; margin-bottom: 24px;">🦉</div>
+    <div class="label" style="color: var(--gold); margin-bottom: 16px;">The Club is Open</div>
+    <h2 style="margin-bottom: 20px; color: var(--gold);">Join the Night Owl Club</h2>
+    <p style="max-width: 560px; margin: 0 auto 40px; font-size: 1.1rem;">
+      38 nights. 342 hours. The record depends on you.
+      Sign up for an overnight shift and become the reason it never stops.
+    </p>
+    <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+      <a href="signup.html?block=nightowl&utm_source=night-owl-page&utm_medium=footer-cta&utm_campaign=nightowl"
+         class="btn btn-gold" style="font-size: 1.1rem; padding: 16px 40px;">
+        🦉 Sign Up for an Overnight Shift
+      </a>
+      <a href="participate.html" class="btn btn-outline">Learn about all shifts →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div style="font-size: 1.8rem; margin-bottom: 12px;">🎤</div>
+    <p style="font-weight: 700; color: var(--white); margin-bottom: 6px;">Sing Until Nobody's Gone</p>
+    <p style="margin-bottom: 24px;">June 12 – July 19, 2026 · Times Square, New York City</p>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="participate.html">Participate</a>
+      <a href="night-owl.html">Night Owl</a>
+      <a href="signup.html">Sign Up</a>
+      <a href="faq.html">FAQ</a>
+      <a href="press.html">Press</a>
+      <a href="mailto:hello@sungclub.com">Contact</a>
+    </div>
+    <p>© 2026 Sing Until Nobody's Gone. All rights reserved.</p>
+    <p style="margin-top: 8px; font-size: 0.8rem;">Raising awareness for Gen-Z mental health through music.</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('hamburger').addEventListener('click', function() {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+</script>
+</body>
+</html>
