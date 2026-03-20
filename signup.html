@@ -33,6 +33,13 @@
 <!-- FORM PAGE -->
 <div class="form-page">
   <div class="container">
+    <!-- Wave 1 close / Wave 2 gap banner — shown March 22–31 -->
+    <div id="wave-close-banner" style="display:none; background:linear-gradient(90deg,rgba(255,45,120,0.08),rgba(0,212,255,0.05)); border:1px solid rgba(255,45,120,0.3); border-radius:14px; padding:20px 24px; text-align:center; margin-bottom:32px;">
+      <div style="font-size:0.8rem;font-weight:700;color:var(--pink);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">Wave 1 RSVP Closed</div>
+      <p style="color:var(--gray-light);margin:0 0 12px;">Wave 1 registration closed with <strong style="color:var(--white);">247 singers</strong> in the pipeline. <strong style="color:var(--pink);">Wave 2 opens April 1 — join the waitlist below.</strong></p>
+      <p style="color:var(--gray);font-size:0.85rem;margin:0;">Fill in the form below to be first in line for Wave 2 on April 1.</p>
+    </div>
+
     <!-- Urgency + social proof bar -->
     <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:28px;">
       <div style="background:rgba(255,45,120,0.1);border:1px solid rgba(255,45,120,0.25);border-radius:100px;padding:8px 18px;font-size:0.82rem;font-weight:700;display:flex;align-items:center;gap:8px;">
@@ -41,8 +48,8 @@
       <div style="background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.2);border-radius:100px;padding:8px 18px;font-size:0.82rem;font-weight:700;display:flex;align-items:center;gap:8px;">
         <span style="color:var(--blue);">📅</span> <span style="color:var(--gray-light);"><strong style="color:var(--blue);" id="signupDaysLeft">--</strong> days until the record starts</span>
       </div>
-      <div id="waveUrgencyPill" style="background:rgba(255,215,0,0.08);border:1px solid rgba(255,215,0,0.2);border-radius:100px;padding:8px 18px;font-size:0.82rem;font-weight:700;display:flex;align-items:center;gap:8px;">
-        <span style="color:var(--gold);">⚡</span> <span style="color:var(--gray-light);">Wave 1 closes <strong style="color:var(--gold);">March 22</strong> — Wave 2 opens April 1</span>
+      <div id="waveStatusPill" style="background:rgba(255,215,0,0.08);border:1px solid rgba(255,215,0,0.2);border-radius:100px;padding:8px 18px;font-size:0.82rem;font-weight:700;display:flex;align-items:center;gap:8px;">
+        <span style="color:var(--gold);">⚡</span> <span id="waveStatusText" style="color:var(--gray-light);">Wave 1 closes <strong style="color:var(--gold);">March 22</strong> — Wave 2 opens April 1</span>
       </div>
     </div>
 
@@ -369,18 +376,50 @@
     }
   })();
 
-  // Gap period messaging (March 23 – March 31): update urgency pill after Wave 1 closes
+  // ── Wave state management ───────────────────────────────────────────────────
+  // Wave 1 closes March 22, 2026 (end of day ET)
+  // Wave 2 opens April 1, 2026 (start of day ET)
+  // Wave 2 closes April 30, 2026 (end of day ET)
   (function() {
-    var urgencyPill = document.getElementById('waveUrgencyPill');
-    if (!urgencyPill) return;
-    var now = new Date();
-    var wave1Close = new Date('2026-03-23T00:00:00-04:00'); // after March 22 EOD
-    var wave2Open  = new Date('2026-04-01T00:00:00-04:00');
-    if (now >= wave2Open) {
-      urgencyPill.innerHTML = '<span style="color:var(--pink);">🎤</span> <span style="color:var(--gray-light);"><strong style="color:var(--pink);">Wave 2</strong> registration is open — <strong style="color:var(--gold);">closes April 30</strong></span>';
-    } else if (now >= wave1Close) {
-      urgencyPill.innerHTML = '<span style="color:var(--gold);">⚡</span> <span style="color:var(--gray-light);"><strong style="color:var(--gold);">Wave 1 closed</strong> — Wave 2 opens <strong style="color:var(--gold);">April 1</strong></span>';
+    var now = Date.now();
+    var wave1Close  = new Date('2026-03-22T23:59:59-04:00').getTime();
+    var wave2Open   = new Date('2026-04-01T00:00:00-04:00').getTime();
+    var wave2Close  = new Date('2026-04-30T23:59:59-04:00').getTime();
+
+    var pillEl   = document.getElementById('waveStatusText');
+    var bannerEl = document.getElementById('wave-close-banner');
+    var waveInput = document.querySelector('input[name="rsvp_wave"]');
+
+    if (now >= wave1Close && now < wave2Open) {
+      // Gap period: Wave 1 closed, Wave 2 not yet open
+      if (bannerEl) bannerEl.style.display = 'block';
+      if (pillEl) pillEl.innerHTML = 'Wave 1 closed — <strong style="color:var(--gold);">Wave 2 opens April 1</strong>';
+      // Disable submit until Wave 2 opens — capture waitlist intent instead
+      var submitBtn = document.getElementById('submitBtn');
+      if (submitBtn) {
+        submitBtn.textContent = '📋 Join Wave 2 Waitlist (Opens April 1)';
+      }
+      // Keep rsvp_wave=1 so waitlist entries are tagged distinctly
+      if (waveInput) waveInput.value = '1-waitlist';
+    } else if (now >= wave2Open && now <= wave2Close) {
+      // Wave 2 open
+      if (pillEl) pillEl.innerHTML = '<strong style="color:var(--gold);">Wave 2 open</strong> — closes April 30';
+      if (waveInput) waveInput.value = '2';
+      // Update form title
+      var formTitle = document.querySelector('.form-header h1');
+      if (formTitle) formTitle.innerHTML = 'Join the <span class="gradient-text">World Record</span> — Wave 2';
+    } else if (now > wave2Close) {
+      // All waves closed
+      if (pillEl) pillEl.innerHTML = '<strong style="color:var(--gray);">Registration closed</strong>';
+      var submitBtn2 = document.getElementById('submitBtn');
+      if (submitBtn2) {
+        submitBtn2.disabled = true;
+        submitBtn2.textContent = 'Registration Closed';
+        submitBtn2.style.opacity = '0.5';
+        submitBtn2.style.cursor = 'not-allowed';
+      }
     }
+    // else: Wave 1 is still open — default HTML state is correct
   })();
 
   // Show/hide group fields
