@@ -65,6 +65,32 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     .sun-logo { font-size: 3.5rem; display: block; margin-bottom: 16px; }
+    /* Wave 1 close banner — hidden by default. BOARD: change display:none to display:block on March 22 */
+    #wave1-close-banner {
+      display: none; /* TOGGLE: change to "block" to activate Wave 1 close message */
+      background: linear-gradient(90deg, #1a1a2e, #16213e);
+      border-bottom: 1px solid rgba(255,45,120,0.4);
+      color: #fff;
+      text-align: center;
+      padding: 12px 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      position: relative;
+      z-index: 200;
+    }
+    #wave1-close-banner a { color: #FF2D78; text-decoration: underline; }
+    #wave1-close-banner .banner-close {
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.6);
+      cursor: pointer;
+      font-size: 1.1rem;
+      line-height: 1;
+    }
     /* Wave 2 announcement banner — hidden by default, toggle via JS or remove display:none to activate */
     #wave2-banner {
       display: none; /* TOGGLE: change to "block" to show Wave 2 banner */
@@ -93,6 +119,14 @@
   </style>
 </head>
 <body>
+
+<!-- WAVE 1 CLOSE BANNER — BOARD ACTION: change display:none to display:block on March 22 -->
+<div id="wave1-close-banner" role="banner" aria-label="Wave 1 RSVP closed">
+  🎤 <strong style="color:#FF2D78;">Wave 1 RSVP Closed</strong> — 247 singers in the pipeline.
+  <strong style="color:#fff;">Wave 2 opens April 1.</strong>
+  <a href="signup.html?utm_source=wave1-close&utm_medium=website&utm_campaign=wave2">Join the Wave 2 Waitlist →</a>
+  <button class="banner-close" onclick="this.parentElement.style.display='none'" aria-label="Close">✕</button>
+</div>
 
 <!-- WAVE 2 ANNOUNCEMENT BANNER (hidden until April 1 launch) -->
 <div id="wave2-banner" role="banner" aria-label="Wave 2 announcement">
@@ -267,8 +301,8 @@
           <div class="timeline-dot"></div>
           <div>
             <div class="timeline-date">Wave 1 closes March 22 · Wave 2: April 1–30</div>
-            <div class="timeline-title">Singer Registration Open</div>
-            <div class="timeline-desc">Wave 1 closes March 22. Wave 2 opens April 1. Sign up for your 2-hour shift — spots fill fast, especially overnight blocks.</div>
+            <div class="timeline-title">Singer Registration</div>
+            <div class="timeline-desc">Wave 1 closes March 22. Wave 2 opens April 1. Sign up for your 2-hour singing shift — spots fill fast, especially overnight blocks.</div>
           </div>
         </div>
         <div class="timeline-item">
