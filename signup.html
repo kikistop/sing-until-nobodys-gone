@@ -41,7 +41,7 @@
       <div style="background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.2);border-radius:100px;padding:8px 18px;font-size:0.82rem;font-weight:700;display:flex;align-items:center;gap:8px;">
         <span style="color:var(--blue);">📅</span> <span style="color:var(--gray-light);"><strong style="color:var(--blue);" id="signupDaysLeft">--</strong> days until the record starts</span>
       </div>
-      <div style="background:rgba(255,215,0,0.08);border:1px solid rgba(255,215,0,0.2);border-radius:100px;padding:8px 18px;font-size:0.82rem;font-weight:700;display:flex;align-items:center;gap:8px;">
+      <div id="waveUrgencyPill" style="background:rgba(255,215,0,0.08);border:1px solid rgba(255,215,0,0.2);border-radius:100px;padding:8px 18px;font-size:0.82rem;font-weight:700;display:flex;align-items:center;gap:8px;">
         <span style="color:var(--gold);">⚡</span> <span style="color:var(--gray-light);">Wave 1 closes <strong style="color:var(--gold);">March 22</strong> — Wave 2 opens April 1</span>
       </div>
     </div>
@@ -366,6 +366,20 @@
     if (el) {
       var diff = new Date('2026-06-12T06:00:00-04:00').getTime() - Date.now();
       el.textContent = diff > 0 ? Math.ceil(diff / 86400000) : '0';
+    }
+  })();
+
+  // Gap period messaging (March 23 – March 31): update urgency pill after Wave 1 closes
+  (function() {
+    var urgencyPill = document.getElementById('waveUrgencyPill');
+    if (!urgencyPill) return;
+    var now = new Date();
+    var wave1Close = new Date('2026-03-23T00:00:00-04:00'); // after March 22 EOD
+    var wave2Open  = new Date('2026-04-01T00:00:00-04:00');
+    if (now >= wave2Open) {
+      urgencyPill.innerHTML = '<span style="color:var(--pink);">🎤</span> <span style="color:var(--gray-light);"><strong style="color:var(--pink);">Wave 2</strong> registration is open — <strong style="color:var(--gold);">closes April 30</strong></span>';
+    } else if (now >= wave1Close) {
+      urgencyPill.innerHTML = '<span style="color:var(--gold);">⚡</span> <span style="color:var(--gray-light);"><strong style="color:var(--gold);">Wave 1 closed</strong> — Wave 2 opens <strong style="color:var(--gold);">April 1</strong></span>';
     }
   })();
 
