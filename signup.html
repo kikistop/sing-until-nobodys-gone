@@ -435,6 +435,10 @@
   const params = new URLSearchParams(location.search);
   const SUNLOG_API = params.get('api') || 'https://sunlog.onrender.com';
 
+  // Backup Google Form URL — update once board creates the form (SUN-189 D4 spec)
+  // Set to null to hide the backup link when no form is available
+  const GOOGLE_FORM_BACKUP_URL = null; // TODO: replace null with Google Form URL when created
+
   // ── UTM / deep-link pre-fill ────────────────────────────────────────────────
   // Pre-check Night Owl time block if ?block=nightowl or ?block=night_owl in URL
   const blockParam = params.get('block');
@@ -520,7 +524,15 @@
       window.location.href = `thank-you.html?${qs.toString()}`;
     } catch (err) {
       console.error(err);
-      errEl.textContent = err.message || 'Something went wrong. Please try again or email volunteers@sungclub.com.';
+      // Detect network failure (SunLog offline) vs server-side validation error
+      const isNetworkError = err instanceof TypeError && /fetch|network|failed/i.test(err.message);
+      const userMsg = isNetworkError
+        ? 'Our registration server is temporarily offline.'
+        : (err.message || 'Something went wrong. Please try again.');
+      const backupHtml = (isNetworkError && GOOGLE_FORM_BACKUP_URL)
+        ? ` <a href="${GOOGLE_FORM_BACKUP_URL}" target="_blank" rel="noopener" style="color:#ff6b6b;font-weight:700;text-decoration:underline;">Register via backup form →</a>`
+        : ' Please try again or email <a href="mailto:volunteers@sungclub.com" style="color:#ff6b6b;">volunteers@sungclub.com</a>.';
+      errEl.innerHTML = userMsg + backupHtml;
       errEl.style.display = 'block';
       btn.disabled = false;
       btn.textContent = '🎤 Submit My Application';
