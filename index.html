@@ -65,9 +65,41 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     .sun-logo { font-size: 3.5rem; display: block; margin-bottom: 16px; }
+    /* Wave 2 announcement banner — hidden by default, toggle via JS or remove display:none to activate */
+    #wave2-banner {
+      display: none; /* TOGGLE: change to "block" to show Wave 2 banner */
+      background: linear-gradient(90deg, #FF2D78, #9B59B6);
+      color: #fff;
+      text-align: center;
+      padding: 12px 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      position: relative;
+      z-index: 200;
+    }
+    #wave2-banner a { color: #fff; text-decoration: underline; }
+    #wave2-banner .banner-close {
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.8);
+      cursor: pointer;
+      font-size: 1.1rem;
+      line-height: 1;
+    }
   </style>
 </head>
 <body>
+
+<!-- WAVE 2 ANNOUNCEMENT BANNER (hidden until April 1 launch) -->
+<div id="wave2-banner" role="banner" aria-label="Wave 2 announcement">
+  🎉 <strong>Wave 2 registration is now open!</strong> 240+ singers already in the pipeline.
+  <a href="signup.html?utm_source=wave2-banner&utm_medium=website&utm_campaign=wave2">Sign up now →</a>
+  <button class="banner-close" onclick="this.parentElement.style.display='none'" aria-label="Close">✕</button>
+</div>
 
 <!-- NAV -->
 <nav>
@@ -128,8 +160,8 @@
           <div class="desc">Hours of Singing</div>
         </div>
         <div class="hero-stat">
-          <div class="number glow-gold">400+</div>
-          <div class="desc">Singers Needed</div>
+          <div class="number glow-gold">240+</div>
+          <div class="desc">In the Pipeline</div>
         </div>
         <div class="hero-stat">
           <div class="number" style="color: var(--purple-light)">1</div>
