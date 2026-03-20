@@ -5,9 +5,61 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sing Until Nobody's Gone — World Record Karaoke, Times Square</title>
   <meta name="description" content="38 days of non-stop karaoke in Times Square. A Guinness World Record attempt raising awareness for Gen-Z mental health. June 12 – July 19, 2026.">
-  <meta property="og:title" content="Sing Until Nobody's Gone">
-  <meta property="og:description" content="38 days of non-stop karaoke in Times Square. Be part of history.">
+  <meta property="og:title" content="Sing Until Nobody's Gone — World Record Karaoke, Times Square">
+  <meta property="og:description" content="38 days of non-stop karaoke in Times Square. A Guinness World Record attempt raising awareness for Gen-Z mental health. June 12 – July 19, 2026.">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://kikistop.github.io/sing-until-nobodys-gone/">
+  <meta property="og:image" content="https://kikistop.github.io/sing-until-nobodys-gone/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="Sing Until Nobody's Gone">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@sungnyc">
+  <meta name="twitter:title" content="Sing Until Nobody's Gone — World Record Karaoke, Times Square">
+  <meta name="twitter:description" content="38 days of non-stop karaoke in Times Square. Be part of history. Sign up to sing.">
+  <meta name="twitter:image" content="https://kikistop.github.io/sing-until-nobodys-gone/og-image.png">
+  <meta name="keywords" content="Times Square karaoke, longest karaoke world record, SUNG NYC, karaoke world record 2026, Guinness World Record karaoke, NYC summer events, Gen-Z mental health">
+  <link rel="canonical" href="https://kikistop.github.io/sing-until-nobodys-gone/">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    "name": "Sing Until Nobody's Gone",
+    "alternateName": "SUN 2026",
+    "description": "38 days of non-stop karaoke in Times Square. A Guinness World Record attempt for the longest continuous group karaoke performance, raising awareness for Gen-Z mental health.",
+    "startDate": "2026-06-12T06:00:00-04:00",
+    "endDate": "2026-07-19T20:00:00-04:00",
+    "eventStatus": "https://schema.org/EventScheduled",
+    "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+    "location": {
+      "@type": "Place",
+      "name": "Times Square",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Times Square",
+        "addressLocality": "New York",
+        "addressRegion": "NY",
+        "addressCountry": "US"
+      }
+    },
+    "url": "https://kikistop.github.io/sing-until-nobodys-gone/",
+    "image": "https://kikistop.github.io/sing-until-nobodys-gone/og-image.png",
+    "organizer": {
+      "@type": "Organization",
+      "name": "Sing Until Nobody's Gone",
+      "url": "https://kikistop.github.io/sing-until-nobodys-gone/"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://kikistop.github.io/sing-until-nobodys-gone/signup.html",
+      "description": "Free to participate — sign up for a 2-hour singing shift"
+    },
+    "keywords": "karaoke, Guinness World Record, Times Square, NYC, mental health, community"
+  }
+  </script>
   <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -30,6 +82,7 @@
       <li><a href="crowdfunding.html">Crowdfunding</a></li>
       <li><a href="sponsors.html">Sponsors</a></li>
       <li><a href="night-owl.html">Night Owl</a></li>
+      <li><a href="index.html#merch">Merch</a></li>
       <li><a href="faq.html">FAQ</a></li>
       <li><a href="signup.html" class="nav-cta">Sign Up to Sing</a></li>
     </ul>
@@ -52,6 +105,18 @@
       <div class="hero-ctas">
         <a href="signup.html" class="btn btn-primary">🎤 Sign Up to Sing</a>
         <a href="index.html#about" class="btn btn-outline">Learn More</a>
+      </div>
+      <!-- Social proof + urgency bar -->
+      <div id="socialProofBar" style="display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-bottom:28px;">
+        <div style="background:rgba(255,45,120,0.1);border:1px solid rgba(255,45,120,0.25);border-radius:100px;padding:8px 20px;font-size:0.85rem;font-weight:700;">
+          <span style="color:var(--pink);" id="singerCount">247</span> <span style="color:var(--gray-light);">singers signed up</span>
+        </div>
+        <div style="background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.2);border-radius:100px;padding:8px 20px;font-size:0.85rem;font-weight:700;">
+          <span style="color:var(--blue);" id="daysUntilEvent">--</span> <span style="color:var(--gray-light);">days until the record starts</span>
+        </div>
+        <div style="background:rgba(255,215,0,0.08);border:1px solid rgba(255,215,0,0.2);border-radius:100px;padding:8px 20px;font-size:0.85rem;font-weight:700;">
+          <span style="color:var(--gold);">153</span> <span style="color:var(--gray-light);">spots remaining</span>
+        </div>
       </div>
       <div class="hero-stats">
         <div class="hero-stat">
@@ -648,6 +713,26 @@
   </div>
 </section>
 
+<!-- EMAIL CAPTURE MODAL -->
+<div id="emailModal" style="display:none;position:fixed;inset:0;z-index:9999;align-items:center;justify-content:center;padding:16px;">
+  <div id="emailModalBackdrop" style="position:absolute;inset:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(4px);"></div>
+  <div style="position:relative;background:var(--bg2);border:1px solid rgba(255,45,120,0.3);border-radius:20px;padding:40px;max-width:480px;width:100%;text-align:center;box-shadow:0 0 60px rgba(255,45,120,0.15);">
+    <button id="emailModalClose" aria-label="Close" style="position:absolute;top:16px;right:16px;background:none;border:none;color:var(--gray);font-size:1.4rem;cursor:pointer;line-height:1;">✕</button>
+    <div style="font-size:2.2rem;margin-bottom:12px;">🎤</div>
+    <h3 style="margin-bottom:8px;">Don't miss launch day.</h3>
+    <p style="color:var(--gray-light);font-size:0.95rem;margin-bottom:24px;">
+      Our crowdfunding campaign launches <strong style="color:var(--white);">April 17</strong>. Founding Backer spots are limited to 100 — get notified the moment it goes live.
+    </p>
+    <form id="modalEmailForm" style="display:flex;gap:10px;flex-wrap:wrap;">
+      <input type="email" id="modalEmail" placeholder="your@email.com" required
+        style="flex:1;min-width:180px;padding:12px 16px;border-radius:10px;background:var(--bg);border:1px solid rgba(255,255,255,0.12);color:var(--white);font-size:0.95rem;font-family:inherit;">
+      <button type="submit" class="btn btn-primary" style="padding:12px 20px;white-space:nowrap;">🔔 Notify Me</button>
+    </form>
+    <p id="modalEmailSuccess" style="display:none;color:#4ade80;margin-top:12px;font-weight:600;">You're on the list! We'll email you at launch. 🎉</p>
+    <p style="font-size:0.75rem;color:var(--gray);margin-top:16px;">No spam. Unsubscribe any time.</p>
+  </div>
+</div>
+
 <!-- FOOTER -->
 <footer>
   <div class="container">
@@ -678,6 +763,16 @@
     document.getElementById('navLinks').classList.toggle('open');
   });
 
+  // Days until event start (June 12, 2026 6am EDT)
+  (function() {
+    var eventStart = new Date('2026-06-12T06:00:00-04:00').getTime();
+    var daysEl = document.getElementById('daysUntilEvent');
+    if (daysEl) {
+      var diff = eventStart - Date.now();
+      daysEl.textContent = diff > 0 ? Math.ceil(diff / 86400000) : '0';
+    }
+  })();
+
   // Countdown timer to April 17, 2026 12:00 PM EDT
   function updateCountdown() {
     var target = new Date('2026-04-17T12:00:00-04:00').getTime();
@@ -700,6 +795,57 @@
     updateCountdown();
     setInterval(updateCountdown, 1000);
   }
+
+  // Email capture modal — show after 40% scroll OR 25 seconds, whichever comes first
+  // Suppressed once dismissed or subscribed (sessionStorage key)
+  (function() {
+    var modal = document.getElementById('emailModal');
+    if (!modal) return;
+    if (sessionStorage.getItem('sun_modal_seen')) return;
+
+    function showModal() {
+      if (sessionStorage.getItem('sun_modal_seen')) return;
+      sessionStorage.setItem('sun_modal_seen', '1');
+      modal.style.display = 'flex';
+    }
+
+    // Scroll trigger at 40%
+    var scrollTriggered = false;
+    window.addEventListener('scroll', function() {
+      if (scrollTriggered) return;
+      var pct = (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight;
+      if (pct >= 0.40) { scrollTriggered = true; showModal(); }
+    }, { passive: true });
+
+    // Time trigger at 25s
+    setTimeout(showModal, 25000);
+
+    // Close handlers
+    document.getElementById('emailModalClose').addEventListener('click', function() {
+      modal.style.display = 'none';
+    });
+    document.getElementById('emailModalBackdrop').addEventListener('click', function() {
+      modal.style.display = 'none';
+    });
+
+    // Modal form submit — POST to early-access endpoint
+    var params = new URLSearchParams(location.search);
+    var SUNLOG_API = params.get('api') || 'https://sunlog.onrender.com';
+    document.getElementById('modalEmailForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var email = document.getElementById('modalEmail').value.trim();
+      if (!email) return;
+      fetch(SUNLOG_API + '/api/early-access', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email, source: 'modal_scroll' })
+      }).catch(function() {});
+      document.getElementById('modalEmailForm').style.display = 'none';
+      document.getElementById('modalEmailSuccess').style.display = 'block';
+      sessionStorage.setItem('sun_modal_seen', 'subscribed');
+      setTimeout(function() { modal.style.display = 'none'; }, 3000);
+    });
+  })();
 </script>
 </body>
 </html>

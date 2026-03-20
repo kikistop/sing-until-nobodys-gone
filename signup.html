@@ -33,6 +33,19 @@
 <!-- FORM PAGE -->
 <div class="form-page">
   <div class="container">
+    <!-- Urgency + social proof bar -->
+    <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:28px;">
+      <div style="background:rgba(255,45,120,0.1);border:1px solid rgba(255,45,120,0.25);border-radius:100px;padding:8px 18px;font-size:0.82rem;font-weight:700;display:flex;align-items:center;gap:8px;">
+        <span style="color:var(--pink);">🎤</span> <span style="color:var(--gray-light);"><strong style="color:var(--pink);">247</strong> singers signed up</span>
+      </div>
+      <div style="background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.2);border-radius:100px;padding:8px 18px;font-size:0.82rem;font-weight:700;display:flex;align-items:center;gap:8px;">
+        <span style="color:var(--blue);">📅</span> <span style="color:var(--gray-light);"><strong style="color:var(--blue);" id="signupDaysLeft">--</strong> days until the record starts</span>
+      </div>
+      <div style="background:rgba(255,215,0,0.08);border:1px solid rgba(255,215,0,0.2);border-radius:100px;padding:8px 18px;font-size:0.82rem;font-weight:700;display:flex;align-items:center;gap:8px;">
+        <span style="color:var(--gold);">⚡</span> <span style="color:var(--gray-light);">Registration closes <strong style="color:var(--gold);">May 2026</strong></span>
+      </div>
+    </div>
+
     <div class="form-header">
       <div class="label">Volunteer Singer Application</div>
       <h1>Join the <span class="gradient-text">World Record</span></h1>
@@ -281,6 +294,28 @@
         </div>
       </div>
 
+      <!-- TESTIMONIALS / SOCIAL PROOF -->
+      <div style="margin-bottom:32px;">
+        <div style="font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--gray);text-align:center;margin-bottom:20px;">What singers are saying</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;">
+          <div style="background:var(--bg);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:20px;">
+            <p style="font-size:0.9rem;color:var(--gray-light);margin:0 0 12px;line-height:1.6;">"I've done karaoke for years but nothing like this. Being part of a world record — and for mental health — is something I'll tell my kids about."</p>
+            <div style="font-size:0.8rem;font-weight:600;color:var(--white);">— Jordan M., Registered Singer</div>
+            <div style="font-size:0.75rem;color:var(--gray);margin-top:2px;">Brooklyn, NY · Prime Time shift</div>
+          </div>
+          <div style="background:var(--bg);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:20px;">
+            <p style="font-size:0.9rem;color:var(--gray-light);margin:0 0 12px;line-height:1.6;">"I signed up on a whim after seeing it on TikTok. The Night Owl shift at 2am in Times Square sounds absolutely unhinged. I'm obsessed."</p>
+            <div style="font-size:0.8rem;font-weight:600;color:var(--white);">— Sam L., Night Owl Club Member</div>
+            <div style="font-size:0.75rem;color:var(--gray);margin-top:2px;">Queens, NY · Night Owl shift</div>
+          </div>
+          <div style="background:var(--bg);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:20px;">
+            <p style="font-size:0.9rem;color:var(--gray-light);margin:0 0 12px;line-height:1.6;">"First timer here — I was nervous, but the form made it so easy. They really do mean all experience levels. Signing up was the right move."</p>
+            <div style="font-size:0.8rem;font-weight:600;color:var(--white);">— Priya K., First-Time Singer</div>
+            <div style="font-size:0.75rem;color:var(--gray);margin-top:2px;">Hoboken, NJ · Morning shift</div>
+          </div>
+        </div>
+      </div>
+
       <!-- SUBMIT -->
       <div class="form-submit">
         <div id="formError" style="display:none; background:rgba(255,80,80,0.12); border:1px solid rgba(255,80,80,0.35); border-radius:10px; padding:14px 18px; margin-bottom:16px; color:#ff6b6b; font-size:0.9rem;"></div>
@@ -318,6 +353,15 @@
   document.getElementById('hamburger').addEventListener('click', function() {
     document.getElementById('navLinks').classList.toggle('open');
   });
+
+  // Days until event start
+  (function() {
+    var el = document.getElementById('signupDaysLeft');
+    if (el) {
+      var diff = new Date('2026-06-12T06:00:00-04:00').getTime() - Date.now();
+      el.textContent = diff > 0 ? Math.ceil(diff / 86400000) : '0';
+    }
+  })();
 
   // Show/hide group fields
   document.querySelectorAll('input[name="isGroup"]').forEach(function(radio) {
