@@ -28,7 +28,7 @@ Fallback photo: High-energy singer at a mic with Times Square backdrop.
 
 ## Campaign Summary (GoFundMe "short description", ~200 chars)
 
-> We're attempting the world's longest karaoke marathon — 912 hours non-stop in Times Square. Every dollar funds Gen-Z mental health. Join 240+ singers already in the pipeline.
+> We're attempting the world's longest karaoke marathon — 912 hours non-stop in Times Square. Every dollar funds Gen-Z mental health. Join 247+ singers already in the pipeline.
 
 ---
 
@@ -106,7 +106,7 @@ We've done the hard work. Now we need the resources to see it through.
 
 ### The Team
 
-We are a passionate group of organizers, musicians, and mental health advocates who believe this record can change the conversation. Our registration system is live, our volunteer network is growing, and we have 240+ people already committed.
+We are a passionate group of organizers, musicians, and mental health advocates who believe this record can change the conversation. Our registration system is live, our volunteer network is growing, and we have 247+ people already committed.
 
 We've been building this for months. The record is within reach — we just need the resources to make it happen.
 
