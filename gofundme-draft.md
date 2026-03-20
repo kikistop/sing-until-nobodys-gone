@@ -65,11 +65,12 @@ To pull off 912 continuous hours of live karaoke in Times Square, we need:
 
 ### Where We Are Now
 
-- **240+ singers** already registered and in the pipeline
+- **247 singers** already registered and in the pipeline
 - **All registration and management software** built and ready (SunLog)
 - **Night Owl Club** formed — singers committed to the overnight 10pm–7am shifts
-- **Guinness compliance** framework in place
+- **Guinness compliance** framework in place — 7 GWR tracking features live
 - **Times Square venue** in final negotiations
+- **Fiscal sponsorship** application submitted (pending approval)
 
 We've done the hard work. Now we need the resources to see it through.
 
@@ -125,6 +126,11 @@ All donations are used for production costs regardless. Any shortfall comes from
 **Is this a Guinness-certified attempt?**
 Yes. We are registering the attempt with Guinness World Records and will have adjudicators on-site.
 
+**Are donations tax-deductible?**
+We are in the process of securing fiscal sponsorship through an IRS-recognized 501(c)(3) organization. Once approved, donations will be tax-deductible to the full extent permitted by law. We will update this page immediately upon confirmation. If tax-deductibility is important to you, check back before donating or contact us directly.
+
+> **⚠️ FA-Conditional Note (board-only):** Do NOT mark donations as tax-deductible on the live GoFundMe page until fiscal sponsorship (FA) is confirmed approved. Update this FAQ and the page's "Charity" classification in GoFundMe settings only after FA approval is received. Until then, leave the page as "Personal" type (not charity-verified).
+
 ---
 
 ## Website Integration
@@ -169,4 +175,42 @@ Yes. We are registering the attempt with Guinness World Records and will have ad
 
 ---
 
+---
+
+## Board Review Checklist (Due March 28)
+
+Use this checklist before clicking "Publish" on GoFundMe.
+
+### Content Review
+- [ ] **Title** — Confirm "Sing Until Nobody's Gone — 912 Hours of Karaoke for Gen-Z Mental Health" fits (≤65 chars). Current: 65 chars exactly ✓
+- [ ] **Singer count** — Verify 247 is accurate (or update to latest SunLog total before publishing)
+- [ ] **Venue** — "Times Square" is correct for pre-announcement; update to exact address in May
+- [ ] **June 12, 2026 start date** confirmed — do not change unless event date changes
+- [ ] **$10/$25/$50/$100/$250/$500** reward tier amounts approved
+- [ ] **Physical perk delivery** (September 2026 shipping) — board confirms capacity to fulfill
+- [ ] Founding Backer enamel pin exists / is being ordered — confirm before launch
+- [ ] **Video/cover image** — board provides 30–60 sec video or approved photo before soft launch
+
+### Legal / Compliance
+- [ ] **Tax-deductible language** — FA approval received? If YES: update FAQ + set GoFundMe page type to "Charity." If NO: leave as-is (Personal), no tax-deductible language on public page.
+- [ ] **501(c)(3) disclosure** — If fiscal sponsorship confirmed, add sponsor org name + EIN to GoFundMe's charity field
+- [ ] **"Guinness-certified"** — We are *registering* the attempt; adjudicators will be on-site. Language is accurate — do not claim "already certified"
+- [ ] Reward fulfillment timeline reviewed with board ops lead (digital in 1 week, physical September 2026)
+
+### GoFundMe Settings
+- [ ] Goal amount set: **$[TBD — board to confirm target]** (suggest $25,000–$65,000 based on production budget)
+- [ ] Campaign category: Volunteer/Events (not Medical/Emergency)
+- [ ] Page set to **Unlisted** for April 3 soft launch — confirm before sharing link publicly
+- [ ] UTM-tagged links tested: all 6 sources in the UTM plan resolve correctly
+- [ ] Beneficiary confirmed (campaign creator vs. fiscal sponsor org)
+
+### Pre-Launch Actions
+- [ ] GoFundMe team member account connected to campaign (for updates/withdrawals)
+- [ ] Bank account verified for withdrawals
+- [ ] Inner-circle email list prepared for April 3 soft launch outreach (15–20 early backers)
+- [ ] Website `crowdfunding.html` updated with actual GoFundMe URL before April 3
+
+---
+
 *Draft prepared for board review by March 28. Revisions welcome — update this doc and re-commit.*
+*Singer count last updated: March 20, 2026 (247 registered). Update from SunLog analytics before publishing.*
