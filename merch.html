@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Official Merch — Sing Until Nobody's Gone</title>
+  <meta name="description" content="Limited-edition SUN merchandise. Pre-orders open April 1, 2026. Classic Tee, Night Owl Hoodie, Tote Bag, Enamel Pin, Event Poster, and Sticker Pack.">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .merch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; margin-bottom: 48px; }
+    .merch-item { background: var(--bg2); border: 1px solid rgba(255,255,255,0.07); border-radius: 16px; padding: 28px 24px; display: flex; flex-direction: column; gap: 12px; }
+    .merch-item.featured { border-color: rgba(255,215,0,0.3); }
+    .merch-emoji { font-size: 2.5rem; }
+    .merch-name { font-size: 1.1rem; font-weight: 700; color: var(--white); }
+    .merch-desc { color: var(--gray-light); font-size: 0.88rem; line-height: 1.5; flex-grow: 1; }
+    .merch-price { font-size: 1.4rem; font-weight: 900; color: var(--gold); margin-top: auto; }
+    .merch-badge { display: inline-block; padding: 3px 10px; border-radius: 100px; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; background: rgba(255,215,0,0.15); color: var(--gold); border: 1px solid rgba(255,215,0,0.3); width: fit-content; }
+    .merch-badge.night-owl { background: rgba(0,212,255,0.1); color: var(--blue); border-color: rgba(0,212,255,0.3); }
+
+    .pre-order-box { background: var(--bg2); border: 1px solid rgba(255,215,0,0.2); border-radius: 20px; padding: 40px; max-width: 600px; margin: 0 auto 48px; }
+    .form-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+    .form-group label { font-size: 0.88rem; font-weight: 600; color: var(--gray-light); }
+    .form-group input, .form-group select { background: var(--bg3); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 12px 16px; color: var(--white); font-size: 0.95rem; width: 100%; }
+    .form-group input:focus, .form-group select:focus { outline: none; border-color: rgba(255,215,0,0.5); }
+    .form-group input::placeholder { color: var(--gray); }
+    .checkbox-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .checkbox-item { display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: var(--bg3); border: 1px solid rgba(255,255,255,0.07); border-radius: 8px; cursor: pointer; font-size: 0.85rem; transition: border-color 0.15s; }
+    .checkbox-item:hover { border-color: rgba(255,215,0,0.3); }
+    .checkbox-item input[type="checkbox"] { accent-color: var(--gold); width: 16px; height: 16px; flex-shrink: 0; }
+    .checkbox-item.checked { border-color: rgba(255,215,0,0.4); background: rgba(255,215,0,0.05); }
+
+    .countdown-badge { background: linear-gradient(135deg, rgba(255,215,0,0.1), rgba(255,45,120,0.07)); border: 1px solid rgba(255,215,0,0.25); border-radius: 12px; padding: 16px 24px; text-align: center; margin-bottom: 32px; }
+    .size-table-wrap { overflow-x: auto; }
+    .size-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+    .size-table th, .size-table td { padding: 8px 12px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .size-table th { color: var(--gray); font-weight: 600; }
+    .size-table td { color: var(--gray-light); }
+
+    #successMsg { display: none; text-align: center; padding: 32px; }
+    #successMsg .check { font-size: 3rem; margin-bottom: 16px; }
+    #errorMsg { display: none; background: rgba(255,45,120,0.1); border: 1px solid rgba(255,45,120,0.3); border-radius: 10px; padding: 14px 18px; margin-top: 16px; font-size: 0.9rem; color: var(--pink-light); }
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <nav class="nav" id="mainNav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">SUN 🎤</a>
+      <div class="nav-links">
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="signup.html">Sign Up</a></li>
+        <li><a href="night-owl.html">Night Owl</a></li>
+        <li><a href="sponsors.html">Sponsors</a></li>
+        <li><a href="merch.html" style="color:var(--gold)">Merch</a></li>
+      </div>
+      <a href="signup.html" class="btn btn-primary btn-sm">Register →</a>
+    </div>
+  </nav>
+
+  <main style="padding-top: 100px; min-height: 100vh;">
+    <div class="container" style="max-width: 900px;">
+
+      <!-- Header -->
+      <div class="section-header" style="margin-bottom: 48px;">
+        <div class="label" style="color: var(--gold);">Official Merch</div>
+        <h1>Wear the <span class="glow-gold">Record</span></h1>
+        <p style="max-width: 560px; margin: 0 auto;">Limited-edition SUN merchandise. Pre-orders open April 1, 2026 — all items ship before the June 12 event start.</p>
+      </div>
+
+      <!-- Countdown banner -->
+      <div class="countdown-badge" id="countdownBanner">
+        <span style="font-size: 1.3rem;">🛍️</span>
+        <strong style="color: var(--gold); font-size: 1.05rem; display: block; margin: 4px 0;" id="countdownText">Pre-orders open April 1, 2026</strong>
+        <span style="color: var(--gray-light); font-size: 0.9rem;">Reserve your items now — quantities are limited.</span>
+      </div>
+
+      <!-- Products -->
+      <div class="merch-grid">
+        <div class="merch-item featured">
+          <div class="merch-badge">Most Popular</div>
+          <div class="merch-emoji">👕</div>
+          <div class="merch-name">Classic Tee</div>
+          <div class="merch-desc">Unisex comfort fit. "Sing Until Nobody's Gone" front print. Available S–3XL.</div>
+          <div class="merch-price">$35</div>
+        </div>
+        <div class="merch-item featured">
+          <div class="merch-badge night-owl">Night Owl Exclusive</div>
+          <div class="merch-emoji">🦉</div>
+          <div class="merch-name">Night Owl Hoodie</div>
+          <div class="merch-desc">Heavyweight pullover. Exclusive to Night Owl Club members. Limited run — only 200 made.</div>
+          <div class="merch-price">$55</div>
+        </div>
+        <div class="merch-item">
+          <div class="merch-emoji">👜</div>
+          <div class="merch-name">Tote Bag</div>
+          <div class="merch-desc">Large canvas tote. Perfect for your shift day. Machine washable.</div>
+          <div class="merch-price">$25</div>
+        </div>
+        <div class="merch-item">
+          <div class="merch-emoji">📌</div>
+          <div class="merch-name">Enamel Pin</div>
+          <div class="merch-desc">Hard enamel lapel pin. Collectible SUN logo design with gold finish.</div>
+          <div class="merch-price">$15</div>
+        </div>
+        <div class="merch-item">
+          <div class="merch-emoji">🖼️</div>
+          <div class="merch-name">Event Poster</div>
+          <div class="merch-desc">11×17" art print. Times Square skyline design. Collectible keepsake from the record attempt.</div>
+          <div class="merch-price">$20</div>
+        </div>
+        <div class="merch-item">
+          <div class="merch-emoji">🎨</div>
+          <div class="merch-name">Sticker Pack</div>
+          <div class="merch-desc">6-sticker set. SUN logo, Night Owl, and slogan designs. Waterproof vinyl.</div>
+          <div class="merch-price">$12</div>
+        </div>
+      </div>
+
+      <!-- Pre-order interest form -->
+      <div class="pre-order-box">
+        <div id="formWrap">
+          <div style="text-align: center; margin-bottom: 28px;">
+            <div style="font-size: 2rem; margin-bottom: 10px;">🛒</div>
+            <h2 style="margin-bottom: 8px;" id="formTitle">Reserve Your Spot</h2>
+            <p style="color: var(--gray-light); font-size: 0.92rem;" id="formSubtitle">Leave your info and we'll email you the moment the store opens on April 1.</p>
+          </div>
+
+          <form id="preorderForm" novalidate>
+            <div class="form-group">
+              <label for="firstName">First name *</label>
+              <input type="text" id="firstName" name="firstName" placeholder="Your first name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email *</label>
+              <input type="email" id="email" name="email" placeholder="you@example.com" required>
+            </div>
+
+            <div class="form-group">
+              <label>Items I'm interested in (select all that apply)</label>
+              <div class="checkbox-grid" id="itemsGrid">
+                <label class="checkbox-item"><input type="checkbox" name="items" value="classic-tee"> 👕 Classic Tee ($35)</label>
+                <label class="checkbox-item"><input type="checkbox" name="items" value="night-owl-hoodie"> 🦉 Night Owl Hoodie ($55)</label>
+                <label class="checkbox-item"><input type="checkbox" name="items" value="tote-bag"> 👜 Tote Bag ($25)</label>
+                <label class="checkbox-item"><input type="checkbox" name="items" value="enamel-pin"> 📌 Enamel Pin ($15)</label>
+                <label class="checkbox-item"><input type="checkbox" name="items" value="event-poster"> 🖼️ Event Poster ($20)</label>
+                <label class="checkbox-item"><input type="checkbox" name="items" value="sticker-pack"> 🎨 Sticker Pack ($12)</label>
+              </div>
+            </div>
+
+            <div class="form-group" id="sizeGroup">
+              <label for="shirtSize">Preferred tee/hoodie size (if applicable)</label>
+              <select id="shirtSize" name="shirtSize">
+                <option value="">— No tee/hoodie —</option>
+                <option value="S">S</option>
+                <option value="M">M</option>
+                <option value="L">L</option>
+                <option value="XL">XL</option>
+                <option value="2XL">2XL</option>
+                <option value="3XL">3XL</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn btn-gold" id="submitBtn" style="width: 100%; margin-top: 8px;">
+              🛍️ Reserve My Spot
+            </button>
+          </form>
+
+          <div id="errorMsg"></div>
+        </div>
+
+        <div id="successMsg">
+          <div class="check">🎉</div>
+          <h3 style="margin-bottom: 10px;">You're on the list!</h3>
+          <p style="color: var(--gray-light); font-size: 0.92rem;">We'll email you at <strong id="confirmedEmail" style="color: var(--white);"></strong> as soon as the shop opens on April 1.</p>
+          <p style="margin-top: 20px;"><a href="signup.html" style="color: var(--pink); font-weight: 600;">Register as a singer too →</a></p>
+        </div>
+      </div>
+
+      <!-- Size guide -->
+      <div style="background: var(--bg2); border: 1px solid rgba(255,255,255,0.07); border-radius: 16px; padding: 32px; margin-bottom: 48px; max-width: 600px; margin-left: auto; margin-right: auto;">
+        <div class="label" style="margin-bottom: 16px;">Size Guide</div>
+        <div class="size-table-wrap">
+          <table class="size-table">
+            <tr><th>Size</th><th>Chest</th><th>Length</th><th>Sleeve</th></tr>
+            <tr><td>S</td><td>36–38"</td><td>27"</td><td>33"</td></tr>
+            <tr><td>M</td><td>38–40"</td><td>28"</td><td>34"</td></tr>
+            <tr><td>L</td><td>41–43"</td><td>29"</td><td>35"</td></tr>
+            <tr><td>XL</td><td>44–46"</td><td>30"</td><td>36"</td></tr>
+            <tr><td>2XL</td><td>47–49"</td><td>31"</td><td>37"</td></tr>
+            <tr><td>3XL</td><td>50–52"</td><td>32"</td><td>38"</td></tr>
+          </table>
+        </div>
+        <p style="font-size: 0.8rem; margin-top: 16px; color: var(--gray);">Unisex sizing. When in doubt, size up. Runs true to size.</p>
+        <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.06);">
+          <div style="font-weight: 700; color: var(--white); margin-bottom: 8px; font-size: 0.9rem;">📦 Shipping Info</div>
+          <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 8px;">
+            <li style="font-size: 0.85rem; color: var(--gray-light);">✓ Free shipping on orders $60+</li>
+            <li style="font-size: 0.85rem; color: var(--gray-light);">✓ Ships anywhere in the US</li>
+            <li style="font-size: 0.85rem; color: var(--gray-light);">✓ International shipping available</li>
+            <li style="font-size: 0.85rem; color: var(--gray-light);">✓ Fulfilled by Printful</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer style="background: var(--bg2); border-top: 1px solid rgba(255,255,255,0.06); padding: 40px 0; text-align: center;">
+    <div class="container">
+      <p style="color: var(--gray); font-size: 0.85rem;">
+        <strong style="color: var(--white);">Sing Until Nobody's Gone</strong> · 912 hours · Times Square, NYC · June 12 – July 20, 2026<br>
+        <a href="index.html" style="color: var(--pink); text-decoration: none;">← Back to main site</a>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+  (function () {
+    'use strict';
+
+    // ── API config ─────────────────────────────────────────────────────────────
+    const params   = new URLSearchParams(window.location.search);
+    const SUNLOG   = params.get('api') || 'https://sunlog.onrender.com';
+    // Set this to a Google Form URL as backup when SunLog is offline:
+    const FORM_BACKUP_URL = null; // TODO: board to provide Google Form URL
+
+    // ── Countdown / unlock ─────────────────────────────────────────────────────
+    const PREORDER_OPEN = new Date('2026-04-01T00:00:00-04:00').getTime();
+    const now           = Date.now();
+    const isOpen        = now >= PREORDER_OPEN;
+
+    const countdownEl   = document.getElementById('countdownText');
+    const titleEl       = document.getElementById('formTitle');
+    const subtitleEl    = document.getElementById('formSubtitle');
+    const submitBtn     = document.getElementById('submitBtn');
+
+    if (isOpen) {
+      // Store is open — change CTA to "Order Now"
+      if (countdownEl) {
+        countdownEl.closest('.countdown-badge').style.borderColor = 'rgba(0,212,255,0.3)';
+        countdownEl.style.color = 'var(--blue)';
+        countdownEl.textContent = 'Shop is open — pre-orders now live!';
+      }
+      if (titleEl)    titleEl.textContent   = 'Place Your Pre-Order';
+      if (subtitleEl) subtitleEl.textContent = 'We\'ll send you a payment link and order confirmation by email.';
+      if (submitBtn)  submitBtn.textContent  = '🛍️ Pre-Order Now';
+    } else {
+      // Countdown to April 1
+      const msLeft = PREORDER_OPEN - now;
+      const days   = Math.ceil(msLeft / (1000 * 60 * 60 * 24));
+      if (countdownEl && days > 0) {
+        countdownEl.textContent = `Pre-orders open in ${days} day${days === 1 ? '' : 's'} — April 1, 2026`;
+      }
+    }
+
+    // ── Checkbox highlight ─────────────────────────────────────────────────────
+    document.querySelectorAll('.checkbox-item').forEach(function (label) {
+      const cb = label.querySelector('input[type="checkbox"]');
+      cb.addEventListener('change', function () {
+        label.classList.toggle('checked', cb.checked);
+      });
+    });
+
+    // ── Form submission ────────────────────────────────────────────────────────
+    document.getElementById('preorderForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const firstName = document.getElementById('firstName').value.trim();
+      const email     = document.getElementById('email').value.trim();
+      const items     = Array.from(document.querySelectorAll('input[name="items"]:checked')).map(cb => cb.value);
+      const size      = document.getElementById('shirtSize').value;
+
+      if (!firstName || !email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showError('Please enter your name and a valid email address.');
+        return;
+      }
+
+      const btn = document.getElementById('submitBtn');
+      btn.disabled = true;
+      btn.textContent = 'Submitting…';
+
+      const source = [
+        'merch-preorder',
+        isOpen ? 'open' : 'waitlist',
+        items.length ? items.join('+') : 'unspecified',
+        size ? 'size-' + size : ''
+      ].filter(Boolean).join(':');
+
+      try {
+        const resp = await fetch(`${SUNLOG}/api/email-list`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: firstName, email, source }),
+          signal: AbortSignal.timeout(8000),
+        });
+
+        if (!resp.ok) throw new Error('Server error ' + resp.status);
+
+        showSuccess(email);
+      } catch (err) {
+        btn.disabled = false;
+        btn.textContent = isOpen ? '🛍️ Pre-Order Now' : '🛍️ Reserve My Spot';
+
+        const isOffline = err instanceof TypeError || err.name === 'TimeoutError';
+        if (isOffline && FORM_BACKUP_URL) {
+          showError(
+            'Our system is temporarily unavailable. ' +
+            `<a href="${FORM_BACKUP_URL}" target="_blank" rel="noopener" style="color:var(--gold);font-weight:700;text-decoration:underline;">Use backup form →</a>`
+          );
+        } else if (isOffline) {
+          showError('Our system is temporarily unavailable. Please email <a href="mailto:hello@sungclub.com" style="color:var(--gold);">hello@sungclub.com</a> with your items and we\'ll reserve your spot manually.');
+        } else {
+          showError('Something went wrong. Please try again or email <a href="mailto:hello@sungclub.com" style="color:var(--gold);">hello@sungclub.com</a>.');
+        }
+      }
+    });
+
+    function showSuccess(email) {
+      document.getElementById('formWrap').style.display  = 'none';
+      document.getElementById('successMsg').style.display = 'block';
+      document.getElementById('confirmedEmail').textContent = email;
+    }
+
+    function showError(msg) {
+      const el = document.getElementById('errorMsg');
+      el.innerHTML = msg;
+      el.style.display = 'block';
+    }
+  })();
+  </script>
+</body>
+</html>
