@@ -910,6 +910,23 @@
     setInterval(updateCountdown, 1000);
   }
 
+  // Wave banner auto-show — eliminates board action for March 22 / April 1 toggles
+  (function() {
+    var now         = Date.now();
+    var wave1Close  = new Date('2026-03-22T23:59:59-04:00').getTime();
+    var wave2Open   = new Date('2026-04-01T00:00:00-04:00').getTime();
+    var w1section   = document.getElementById('wave1-close-section');
+    var w2banner    = document.getElementById('wave2-banner');
+    if (now >= wave1Close && now < wave2Open) {
+      // Gap period: show Wave 1 close section
+      if (w1section) w1section.style.display = 'block';
+    } else if (now >= wave2Open) {
+      // Wave 2 open: show Wave 2 banner, ensure Wave 1 section hidden
+      if (w2banner)  w2banner.style.display  = 'block';
+      if (w1section) w1section.style.display = 'none';
+    }
+  })();
+
   // Email capture modal — show after 40% scroll OR 25 seconds, whichever comes first
   // Suppressed once dismissed or subscribed (sessionStorage key)
   (function() {
