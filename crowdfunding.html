@@ -471,18 +471,20 @@
   const UTM = { source: params.get('utm_source'), medium: params.get('utm_medium'), campaign: params.get('utm_campaign') };
   const SUNLOG_API = params.get('api') || 'https://sunlog.onrender.com';
 
-  // Email notify form
+  // Email notify form — queues to localStorage if SunLog is offline so no email is lost
   document.getElementById('notifyForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     const email = document.getElementById('notifyEmail').value.trim();
     if (!email) return;
+    const url = `${SUNLOG_API}/api/email-list`;
+    const payload = { email, source: UTM.source || 'crowdfunding', utmSource: UTM.source, utmMedium: UTM.medium, utmCampaign: UTM.campaign };
     try {
-      await fetch(`${SUNLOG_API}/api/email-list`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, source: UTM.source || 'crowdfunding', utmSource: UTM.source, utmMedium: UTM.medium, utmCampaign: UTM.campaign })
-      });
-    } catch (_) {}
+      await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+    } catch (_) {
+      const pending = JSON.parse(localStorage.getItem('sun_pending_forms') || '[]');
+      pending.push({ url, body: payload });
+      localStorage.setItem('sun_pending_forms', JSON.stringify(pending));
+    }
     document.getElementById('notifyForm').style.display = 'none';
     document.getElementById('notifySuccess').style.display = 'block';
   });
